@@ -47,11 +47,10 @@ window.addEventListener("load", () => {
 
   // -------------------------------------------------------------------------------------------- collapsible
   var the_menu_collapsibles = document.getElementsByClassName("the-menu-collapsible");
-  var i
-  for (i = 0; i < the_menu_collapsibles.length; i++) {
-    //------------------------------------------- 
-    the_menu_collapsibles[i].childNodes.forEach(child => {
-      if (hasClass(child, 'the-sidebar-menu-item')) {
+
+  Array.prototype.forEach.call(the_menu_collapsibles, function (collapsible) {
+    collapsible.childNodes.forEach(child => {
+      if (hasClass(child, 'the-menu-collapsible-parent')) {
         //------------------------------------------- add trailing 
         var trailing = document.createElement("div")
         trailing.classList.add("the-trailing")
@@ -59,26 +58,33 @@ window.addEventListener("load", () => {
         trailing.firstElementChild.classList.add("the-icon-arrow-left")
         trailing.firstElementChild.style.backgroundColor = "#9ab0b0"
         trailing.firstElementChild.style.transition = "all 0.1s ease"
-        // changeIconChildWithSVG(trailing, svgLeftArrow)
+
         child.appendChild(trailing)
         // -------------------------- expand check
         if (hasClass(child, "active")) {
-          the_menu_collapsibles[i].expand = true
-          the_menu_collapsibles[i].setAttribute("expand", true)
-          collapsibleClick(the_menu_collapsibles[i], true)
+          //--------------------------------------- child inside parent
+          child.firstElementChild.classList.add("active")
+          
+          collapsible.expand = true
+          collapsible.setAttribute("expand", true)
+          collapsibleClick(collapsible, true)
+
         }
         else {
-          the_menu_collapsibles[i].expand = false
-          the_menu_collapsibles[i].setAttribute("expand", false)
+          child.firstElementChild.classList.remove("active")
+          collapsible.expand = false
+          collapsible.setAttribute("expand", false)
         }
+        console.log(child)
         // -------------------------- 
       }
     })
-    // the_menu_collapsibles[i].setAttribute("onClick", `collapsibleClick(this,false)`)
-    the_menu_collapsibles[i].addEventListener("click", function () {
-      collapsibleClick(this)
+    collapsible.addEventListener("click", function (e) {
+      if (!hasClass(e.target, "the-menu-collapsible-item")) {
+        collapsibleClick(this)
+      }
     });
-  }
+  })
   // -------------------------------------------------------------------------------------------- end collapsible
 
 });
@@ -125,7 +131,7 @@ function collapsibleClick(element, isInit = false) {
         child.style.opacity = 0
       }
     }
-    if (hasClass(child, 'the-sidebar-menu-item')) {
+    if (hasClass(child, 'the-menu-collapsible-parent')) {
       // ------------------------------- trailing animated
       child.childNodes.forEach(e => {
         if (e.className == "the-trailing") {

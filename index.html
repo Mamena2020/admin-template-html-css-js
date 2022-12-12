@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="admin.js"></script>
+    <script src="tools.js"></script>
+    <link rel="stylesheet" href="tools.css">
     <link rel="stylesheet" href="admin.css">
     <link rel="stylesheet" href="theicon.css">
 </head>
@@ -17,7 +19,7 @@
         <div id="the-topnav">
             <div id="the-topnav-header">
                 <div class="the-center">
-                    <div class="the-icon-home" style="background-color: #ffffff;"></div>
+                    <div class="the-icon-home" style="background-color: #ffffff; height: 22px; width: 22px;"></div>
                 </div>
             </div>
 
@@ -40,6 +42,18 @@
         <!-- --------------------------------------------------------------------- end top bar -->
 
         <div id="the-content">
+
+
+            <!-- <div class="the-modal">
+                <div class="the-modal-content">
+                    <div class="the-modal-close-button">
+                        <div class="the-icon-close" style="background-color: #9ab0b0;"></div>
+                    </div>
+                    <div class="the-modal-header"></div>
+                    <div class="the-modal-body">The Modal</div>
+                </div>
+            </div> -->
+
             <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, saepe dolor eveniet maxime incidunt
                 ducimus, error cupiditate, quia alias aspernatur ab laboriosam labore consequuntur nesciunt nobis sit
@@ -277,7 +291,7 @@
 
     </div>
     <!-- --------------------------------------------------------------------- sidebar -->
-    <div id="the-sidebar" class="the-sidebar-hide">
+    <div id="the-sidebar" class="the-sidebar-show">
         <div id="the-sidebar-brand">
             <div id="the-sidebar-close">
                 <div id="the-sidebar-close-icon">
@@ -289,28 +303,26 @@
         </div>
         <div id="the-sidebar-menu-list">
 
-            <div class="the-sidebar-menu-item">
-                <div class="the-icon">
-                    X
-                </div>
-                <p>Dashboard</p>
-            </div>
+          
 
-            <div class="the-sidebar-menu-item ">
+            <div class="the-sidebar-menu-item  ">
                 <div class="the-icon">
-                    X
+                    <div class="the-icon-home" ></div>
                 </div>
-                Product
+                Dashboard
             </div>
             <!-- ------------------------ -->
             <div class="the-menu-collapsible">
 
-                <div class="the-sidebar-menu-item active">
-                    <div class="the-icon">
-                        <div class="the-icon-arrow-left" style="background-color: #ffffff;"></div>
+                <div class="the-menu-collapsible-parent active">
+                    <div class="the-sidebar-menu-item ">
+                        <div class="the-icon">
+                            <div class="the-icon-arrow-left" ></div>
+                        </div>
+                        Report
                     </div>
-                    Report
                 </div>
+
 
                 <div class="the-menu-collapsible-list ">
                     <div class="the-menu-collapsible-item active">
