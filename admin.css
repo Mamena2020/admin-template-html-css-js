@@ -25,9 +25,10 @@
     right: 10px;
     margin-right: 20px;
     align-items: center;
-   
+    transition: all .8s ease;
 }
-.transition{
+
+.transition {
     -webkit-transition: all .8s ease;
     -moz-transition: all .8s ease;
     -ms-transition: all .8s ease;
@@ -62,7 +63,22 @@
     border-radius: 10px;
     /* margin: auto; */
 }
+.rotate-right {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+.rotate-left {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
 
+/* ---------------------------------- collapsible */
 .the-menu-collapsible {
     grid-template-columns: auto;
 
@@ -74,14 +90,14 @@
     height: 0;
     overflow: hidden;
     grid-template-columns: auto;
+
+    transition: all 1s ease;
 }
 
 .the-menu-collapsible-item {
     height: 30px;
     width: auto;
     /* right:0; */
-
-
     margin-top: 5px;
     margin-bottom: 5px;
     margin-left: 25%;
@@ -96,7 +112,7 @@
     align-items: center;
     /* background-color: #f2f4f4; */
     /* box-shadow: 5px 5px 15px #e3e5e5; */
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 .the-menu-collapsible-item:hover {
@@ -110,6 +126,7 @@
     font-weight: 800;
 }
 
+/* ---------------------------------- end collapsible */
 
 
 
@@ -220,13 +237,13 @@ body {
 
 .the-sidebar-menu-item:hover {
     box-shadow: 1px 1px 20px #b9c3c6;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 .the-sidebar-menu-item.active {
     background-color: #ffffff;
     box-shadow: 5px 5px 15px #b9c3c6;
-    border-radius: 5px;
+    border-radius: 8px;
     font-weight: 800;
 }
 
@@ -253,8 +270,8 @@ body {
 #the-topnav {
     height: 56px;
     width: 100%;
-    /* background-color: #a3c4c4; */
-    background-image: linear-gradient(to bottom, #b0d0d0, #a3c4c4);
+    background-color: #a3c4c4;
+    /* background-image: linear-gradient(to bottom, #b0d0d0, #a3c4c4); */
     box-shadow: 5px 5px 15px #b9c3c6;
     display: inline-block;
     position: absolute;
@@ -315,7 +332,11 @@ body {
     background-color: #ffffff;
     transition: all .5s ease;
     box-shadow: 5px 5px 15px rgb(185, 195, 198);
-    border-radius: 5px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+
     display: grid;
     padding-bottom: 10px;
     padding-top: 10px;
@@ -325,16 +346,16 @@ body {
     /* // layout */
     content: '';
     position: absolute;
-    width: 0;
-    height: 0;
-    bottom: 100%;
-    right: 2px;
+    /* width: 0; */
+    /* height: 100px; */
+    bottom: 99%;
+    right: 1px;
     /* // offset should move with padding of parent */
-    border: 5px solid transparent;
+    border: 8px solid transparent;
     border-top: none;
 
     /* // looks */
-    border-bottom-color: #fff;
+    border-bottom-color: #ffffff;
     filter: drop-shadow(0 -0.0625rem 0.0625rem rgba(0, 0, 0, .1));
 }
 
@@ -348,7 +369,7 @@ body {
     margin-right: 10px;
     cursor: pointer;
     background-color: #ffffff;
-    border-radius: 5px;
+    border-radius: 8px;
     color: inherit;
     text-decoration: inherit;
 

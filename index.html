@@ -8,20 +8,25 @@
     <title>Document</title>
     <script src="admin.js"></script>
     <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="theicon.css">
 </head>
 
 <body>
     <div id="the-body">
-
+        <!-- --------------------------------------------------------------------- top bar -->
         <div id="the-topnav">
-            <div id="the-topnav-header" onclick="admin_open_the_sidebar()">
-                <div class="the-center">X</div>
+            <div id="the-topnav-header">
+                <div class="the-center">
+                    <div class="the-icon-home" style="background-color: #ffffff;"></div>
+                </div>
             </div>
 
             <div id="the-topnav-right">
-                <div class="the-center-right the-topnav-menu-icon" onclick="admin_open_topnav_menu()">P</div>
+                <div class="the-center-right the-topnav-menu-icon" onclick="admin_open_topnav_menu()">
+                    <div class="the-icon-user" style="background-color: #ffffff;"></div>
+                </div>
 
-                <div id="the-topnav-menu" onclick="admin_close_topnav_menu()">
+                <div id="the-topnav-menu">
                     <div id="the-topnav-menu-list">
                         <a href="google.com" class="the-topnav-menu-item">Profile</a>
                         <a class="the-topnav-menu-item">Activity log</a>
@@ -32,6 +37,7 @@
 
             </div>
         </div>
+        <!-- --------------------------------------------------------------------- end top bar -->
 
         <div id="the-content">
             <p>
@@ -270,12 +276,12 @@
         </div>
 
     </div>
-
-    <div id="the-sidebar" class="the-sidebar-show">
+    <!-- --------------------------------------------------------------------- sidebar -->
+    <div id="the-sidebar" class="the-sidebar-hide">
         <div id="the-sidebar-brand">
-            <div id="the-sidebar-close" onclick="admin_close_the_sidebar()">
+            <div id="the-sidebar-close">
                 <div id="the-sidebar-close-icon">
-                    X
+                    <div class="the-icon-close" style="height: 15px; background-color: #9ab0b0;"></div>
                 </div>
             </div>
 
@@ -290,7 +296,7 @@
                 <p>Dashboard</p>
             </div>
 
-            <div class="the-sidebar-menu-item active">
+            <div class="the-sidebar-menu-item ">
                 <div class="the-icon">
                     X
                 </div>
@@ -299,12 +305,11 @@
             <!-- ------------------------ -->
             <div class="the-menu-collapsible">
 
-                <div class="the-sidebar-menu-item ">
+                <div class="the-sidebar-menu-item active">
                     <div class="the-icon">
-                        X
+                        <div class="the-icon-arrow-left" style="background-color: #ffffff;"></div>
                     </div>
                     Report
-
                 </div>
 
                 <div class="the-menu-collapsible-list ">
@@ -398,6 +403,7 @@
 
         </div>
     </div>
+    <!-- --------------------------------------------------------------------- end sidebar -->
 
 
 
