@@ -75,7 +75,6 @@ window.addEventListener("load", () => {
           collapsible.expand = false
           collapsible.setAttribute("expand", false)
         }
-        console.log(child)
         // -------------------------- 
       }
     })
