@@ -1,8 +1,8 @@
 /* modal, alert dialog, splash */
-
+/* ------------------------------------------------------------------------------------- modal */
 .the-modal {
 
-    display: block;
+    display: none;
     /* Hidden by default */
     position: fixed;
     /* Stay in place */
@@ -32,15 +32,15 @@
     width: 85%;
     height: 85%;
     box-shadow: 5px 5px 15px #5d5e5e;
-    border-radius: 8px;
+    border-radius: 10px;
     grid-template-columns: auto;
 }
 
 .the-modal-header {
     height: 56px;
     background-color: #d6dde3;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     /* box-shadow: 4px 2px 10px #c3c0c0; */
 }
 
@@ -59,4 +59,120 @@
     align-items: center;
     cursor: pointer;
 
+}
+
+/* -------------------------------------------------------------------------------------- toast */
+
+
+/* float:right; */
+/* background: #000000;     */
+/* grid-template-rows: auto; */
+/* max-width: 200px;
+    height: 100%;
+    display: block;
+    flex-wrap: wrap;
+    float:right
+     */
+#__the_toast_Container__ {
+
+    max-width: 250px;
+    overflow: hidden;
+    height: auto;
+    bottom: 0;
+    right: 0;
+    float: right;
+    z-index: 100;
+    position: fixed;
+    /* display: block; */
+
+}
+
+/* https://css-tricks.com/animation-techniques-for-adding-and-removing-items-from-a-stack/ */
+/* https://usefulangle.com/post/377/css-animation-on-dom-insert */
+/* 
+@keyframes append-animate {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+*/
+
+.__the_toast__ {
+    float: right;
+    /* animation: append-animate .3s linear; */
+    /* transition: all 1s ease-in-out; */
+
+    transform: translateX(300px);
+    transition: all 0.6s ease-out;
+    opacity: 0;
+
+    overflow: hidden;
+    height: 0px;
+    width: 0px;
+    margin: 0px;
+    background-color: #ffffff;
+    box-shadow: 5px 5px 15px #5d5e5e;
+    color: #717171;
+    border-radius: 8px;
+
+    align-items: center;
+    /* padding-left: 10px; */
+    border-top: none;
+
+    display: grid;
+    grid-template-rows: auto auto;
+}
+
+.__the_toast__.show {
+    height: 50px;
+    width: 240px;
+    margin: 10px;
+    border-top: 3px solid #27a881;
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 0.6s linear;
+}
+
+.the_toast_progressbar {
+    height: 5px;
+    margin: 0px;
+    width: 100%;
+    margin-top: 25px;
+    /* border: solid 1px #000; */
+    overflow: hidden;
+    bottom: 0;
+
+}
+
+.the_toast_progressbar .inner {
+    height: 100%;
+    animation: progressbar-countdown;
+    /* Placeholder, this will be updated using javascript */
+    animation-duration: 40s;
+    /* We stop in the end */
+    animation-iteration-count: 1;
+    /* Stay on pause when the animation is finished finished */
+    animation-fill-mode: forwards;
+    /* We start paused, we start the animation using javascript */
+    animation-play-state: paused;
+    /* We want a linear animation, ease-out is standard */
+    animation-timing-function: linear;
+}
+
+@keyframes progressbar-countdown {
+    0% {
+        width: 100%;
+        background: #0F0;
+    }
+
+    100% {
+        width: 0%;
+        background: #F00;
+    }
 }

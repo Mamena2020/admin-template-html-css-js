@@ -62,17 +62,18 @@
         <!-- --------------------------------------------------------------------- end top bar -->
 
         <div id="the-content">
-
-
-            <!-- <div class="the-modal">
+            <div id="mymodal" class="the-modal">
                 <div class="the-modal-content">
                     <div class="the-modal-close-button">
                         <div class="the-icon-close" style="background-color: #9ab0b0;"></div>
                     </div>
                     <div class="the-modal-header"></div>
-                    <div class="the-modal-body">The Modal</div>
+                    <div class="the-modal-body">The Modal
+                       
+                    </div>
                 </div>
-            </div> -->
+            </div>
+           
 
 
             <div class="the-row">
@@ -188,6 +189,16 @@
                 </div>
                 <div class="the-button-flat-primary">
                     Flat button
+                </div>
+            </div>
+            <div class="the-row " style="margin-top: 10px;">
+                <div class="the-button-raised-primary" onclick="theModalShow('mymodal')">  
+                    Show modal
+                </div>
+            </div>
+            <div class="the-row " style="margin-top: 10px;">
+                <div class="the-button-raised" onclick="theToastShow('this is admin template by andre','toast',5)">
+                    Toast 
                 </div>
             </div>
 
