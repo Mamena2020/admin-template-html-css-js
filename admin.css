@@ -247,12 +247,28 @@
 }
 
 .the-menu-collapsible-list {
-    transition: height 1000ms, opacity 500ms;
-    opacity: 0;
-    height: 0;
+    /* opacity: 0; */
+    height: 0px;
     overflow: hidden;
     grid-template-columns: auto;
-    transition: all 1s ease;
+}
+
+@keyframes collapsible-extend-animate {
+    from {
+        opacity: 0;
+        height: 0px;
+    }
+
+    to {
+        opacity: 1;
+        height: auto;
+    }
+}
+
+.the-menu-collapsible-list.show {
+    animation: collapsible-extend-animate .3s linear;
+    height: auto;
+    transition: height 1s linear, opacity 0.5s ease;
 }
 
 .the-menu-collapsible-item {

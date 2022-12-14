@@ -108,8 +108,8 @@ function changeIconChildWithSVG(parent, svg) {
 
 
 
-function collapsibleClick(element, isInit = false) {
-  var expand = element.expand
+function collapsibleClick(collapsible, isInit = false) {
+  var expand = collapsible.expand
   if (isInit == false) {
     if (expand == true) {
       expand = false;
@@ -118,27 +118,29 @@ function collapsibleClick(element, isInit = false) {
       expand = true
     }
   }
-  element.expand = expand
-  element.setAttribute("expand", expand)
-  element.childNodes.forEach(child => {
+  collapsible.expand = expand
+  collapsible.setAttribute("expand", expand)
+  collapsible.childNodes.forEach(child => {
     if (hasClass(child, 'the-menu-collapsible-list')) {
-      if (element.expand) {
-        child.style.height = 'auto'
-        child.style.opacity = 1
+      if (collapsible.expand) {
+        child.classList.add("show")
+        // child.style.height = 'auto'
+        // child.style.opacity = 1
       } else {
-        child.style.height = 0
-        child.style.opacity = 0
+        child.classList.remove("show")
+        // child.style.height = 0
+        // child.style.opacity = 0
       }
     }
     if (hasClass(child, 'the-menu-collapsible-parent')) {
       // ------------------------------- trailing animated
       child.childNodes.forEach(e => {
         if (e.className == "the-trailing") {
-          if (isInit == true && element.expand == true) {
+          if (isInit == true && collapsible.expand == true) {
             e.firstElementChild.style.transform = "rotate(-90deg)"
           }
           else {
-            if (element.expand == true) {
+            if (collapsible.expand == true) {
               e.firstElementChild.style.transform = "rotate(-90deg)"
             }
             else {
