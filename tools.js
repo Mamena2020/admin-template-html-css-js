@@ -6,7 +6,7 @@ var toastContainer
 window.addEventListener("load", () => {
     loadTheModalSystem()
     loadTheToastSystem()
-    theToastShow("helow,", "title", 3);
+    theToastShow("helow", 3, "success");
     // theToastShow("helow2,", "title", 6);
 
 })
@@ -51,7 +51,7 @@ function loadTheToastSystem() {
 }
 
 
-function theToastShow(message, title = "Slash", duration = 1, backgroundColor = "green",) {
+function theToastShow(message, duration = 1, type = "success") {
 
     let toastId = randomString(12)
     var _toast =
@@ -59,9 +59,68 @@ function theToastShow(message, title = "Slash", duration = 1, backgroundColor = 
     _toast.setAttribute("class", "__the_toast__")
     _toast.setAttribute("id", toastId)
     // ----------------- message
-    var _message = document.createElement('div');
-    _message.innerHTML = message + duration
-    _toast.appendChild(_message)
+
+    var _theListtileTitle = document.createElement('div');
+    _theListtileTitle.classList.add("the-listtile-title")
+
+    var _theListtile = document.createElement("div")
+    _theListtile.classList.add("the-listtile")
+
+    var _theListtileIconParent = document.createElement("div")
+    _theListtileIconParent.classList.add("the-listtile-icon")
+
+    var _theListtileIcon = document.createElement("div")
+    if (type == "success") {
+        _theListtileIcon.classList.add("the-icon-info")
+        _theListtileIcon.style.backgroundColor = "#186a51"
+        _theListtileTitle.innerHTML = "Success"
+        _toast.style.borderColor = "#27a881"
+    }
+    if (type == "warning") {
+        _theListtileIcon.classList.add("the-icon-info")
+        _theListtileIcon.style.backgroundColor = "#747804"
+        _theListtileTitle.innerHTML = "Warning"
+        _toast.style.borderColor = "#d6dc2d"
+    }
+    if (type == "info") {
+        _theListtileIcon.classList.add("the-icon-info")
+        _theListtileIcon.style.backgroundColor = "#2f2f2e"
+        _theListtileTitle.innerHTML = "Info"
+        _toast.style.borderColor = "#7c7c79"
+    }
+    if (type == "error") {
+        _theListtileIcon.classList.add("the-icon-info")
+        _theListtileIcon.style.backgroundColor = "#721818"
+        _theListtileTitle.innerHTML = "Error"
+        _toast.style.borderColor = "#972d1d"
+    }
+    _theListtileIconParent.appendChild(_theListtileIcon)
+
+
+
+    var _theListtileDescription = document.createElement('div');
+    _theListtileDescription.innerHTML = message
+    _theListtileDescription.classList.add("the-listtile-description")
+
+    var _theListtileBody = document.createElement('div');
+    _theListtileBody.appendChild(_theListtileTitle)
+    _theListtileBody.appendChild(_theListtileDescription)
+
+    var _theListtileClose = document.createElement("div")
+    _theListtileClose.classList.add("the-listtile-close")
+    var _theListtileCloseIcon = document.createElement("div")
+    _theListtileCloseIcon.classList.add("the-icon-close")
+    _theListtileCloseIcon.style.height = "13px"
+    _theListtileCloseIcon.style.width = "13px"
+    _theListtileCloseIcon.style.backgroundColor = "#7c7c79"
+
+    _theListtileClose.appendChild(_theListtileCloseIcon)
+
+    _theListtile.appendChild(_theListtileIconParent)
+    _theListtile.appendChild(_theListtileBody)
+    _theListtile.appendChild(_theListtileClose)
+
+    _toast.appendChild(_theListtile)
     // ----------------- proggress
     var _toastProggressParent = document.createElement('div');
     _toastProggressParent.classList.add("the_toast_progressbar")
@@ -76,10 +135,13 @@ function theToastShow(message, title = "Slash", duration = 1, backgroundColor = 
     //------------------ apend to toast container
     toastContainer.appendChild(_toast)
 
-    _toastProggressInner.style.animationPlayState = 'running';
-    
+    _theListtileClose.addEventListener("click", ()=>{
+        theToastRemove(toastId)
+    })
+
     setTimeout(() => {
         _toast.classList.add("show")
+        _toastProggressInner.style.animationPlayState = 'running';
         const _toastTO = setTimeout(() => {
             theToastRemove(toastId)
             clearTimeout(_toastTO)
@@ -90,11 +152,11 @@ function theToastShow(message, title = "Slash", duration = 1, backgroundColor = 
 }
 
 function theToastRemove(toastId) {
-
     var _toast = document.getElementById(toastId)
     if (_toast != undefined) {
         console.log("add class remove")
         _toast.classList.remove("show")
+        _toast.classList.add("remove")
         setTimeout(() => {
             _toast.remove()
         }, 1000);

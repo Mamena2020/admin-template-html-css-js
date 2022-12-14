@@ -80,7 +80,8 @@
     height: auto;
     bottom: 0;
     right: 0;
-    float: right;
+    margin-right: 10px;
+    /* float: right; */
     z-index: 100;
     position: fixed;
     /* display: block; */
@@ -109,45 +110,57 @@
     /* transition: all 1s ease-in-out; */
 
     transform: translateX(300px);
-    transition: all 0.6s ease-out;
+    transition: all 0.6s linear;
     opacity: 0;
-
-    overflow: hidden;
     height: 0px;
     width: 0px;
     margin: 0px;
+
+    overflow: hidden;
     background-color: #ffffff;
-    box-shadow: 5px 5px 15px #5d5e5e;
+    box-shadow: 3px 3px 5px #9b9b9b;
     color: #717171;
-    border-radius: 8px;
+    border-radius: 4px;
 
     align-items: center;
     /* padding-left: 10px; */
     border-top: none;
 
-    display: grid;
-    grid-template-rows: auto auto;
+    /* display: grid;
+    grid-template-rows: auto auto; */
 }
 
 .__the_toast__.show {
-    height: 50px;
-    width: 240px;
-    margin: 10px;
-    border-top: 3px solid #27a881;
+    height: 80px;
+    width: 250px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 10px;
+    /* border-top: 10px solid #27a881; */
+    border-top: 10px solid;
+    border-color: #27a881;
     opacity: 1;
     transform: translateX(0);
-    transition: all 0.6s linear;
+    transition: all 0.2s ease;
+}
+
+.__the_toast__.remove {
+    transform: translateX(300px);
+    transition: all 0.7s linear;
+    opacity: 0;
+    height: 0px;
+    width: 0px;
 }
 
 .the_toast_progressbar {
-    height: 5px;
+    height: 7px;
     margin: 0px;
-    width: 100%;
-    margin-top: 25px;
+    width: 110%;
+    /* margin-top: 30px; */
     /* border: solid 1px #000; */
     overflow: hidden;
+    position: fixed;
     bottom: 0;
-
 }
 
 .the_toast_progressbar .inner {
@@ -168,11 +181,12 @@
 @keyframes progressbar-countdown {
     0% {
         width: 100%;
-        background: #0F0;
+        background: #b2b2af;
     }
 
     100% {
         width: 0%;
-        background: #F00;
+        /* background: #F00; */
+        background: #7c7c79;
     }
 }
