@@ -55,9 +55,9 @@ window.addEventListener("load", () => {
         var trailing = document.createElement("div")
         trailing.classList.add("the-trailing")
         trailing.appendChild(document.createElement("div"))
-        trailing.firstElementChild.classList.add("the-icon-arrow-left")
+        trailing.firstElementChild.classList.add("the-icon-arrow-down")
         trailing.firstElementChild.style.backgroundColor = "#9ab0b0"
-        trailing.firstElementChild.style.transition = "all 0.1s ease"
+        trailing.firstElementChild.style.transition = "all 0.2s ease"
 
         child.appendChild(trailing)
         // -------------------------- expand check
@@ -124,12 +124,10 @@ function collapsibleClick(collapsible, isInit = false) {
     if (hasClass(child, 'the-menu-collapsible-list')) {
       if (collapsible.expand) {
         child.classList.add("show")
-        // child.style.height = 'auto'
-        // child.style.opacity = 1
+        child.classList.remove("hide")
       } else {
         child.classList.remove("show")
-        // child.style.height = 0
-        // child.style.opacity = 0
+        child.classList.add("hide")
       }
     }
     if (hasClass(child, 'the-menu-collapsible-parent')) {
@@ -137,11 +135,11 @@ function collapsibleClick(collapsible, isInit = false) {
       child.childNodes.forEach(e => {
         if (e.className == "the-trailing") {
           if (isInit == true && collapsible.expand == true) {
-            e.firstElementChild.style.transform = "rotate(-90deg)"
+            e.firstElementChild.style.transform = "rotate(-180deg)"
           }
           else {
             if (collapsible.expand == true) {
-              e.firstElementChild.style.transform = "rotate(-90deg)"
+              e.firstElementChild.style.transform = "rotate(-180deg)"
             }
             else {
               e.firstElementChild.style.transform = "rotate(0deg)"

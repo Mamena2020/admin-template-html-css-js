@@ -174,7 +174,6 @@ function theToastShow(message, duration = 1, type = "success") {
 function theToastRemove(toastId) {
     var _toast = document.getElementById(toastId)
     if (_toast != undefined) {
-        console.log("add class remove")
         _toast.classList.remove("show")
         _toast.classList.add("remove")
         setTimeout(() => {
