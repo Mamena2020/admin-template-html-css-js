@@ -38,14 +38,16 @@ https://freeicons.io/icon-list/user-interface-icons-6?page=2
 }
 
 .the-icon-arrow-left {
-    display: inline-block;
+    display: inline;
     width: 17px;
     height: 17px;
     -webkit-mask: url("data:image/svg+xml,%3Csvg width='7px' height='12px' viewBox='0 0 7 12' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Icons' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='Rounded' transform='translate(-652.000000, -2464.000000)'%3E%3Cg id='Hardware' transform='translate(100.000000, 2404.000000)'%3E%3Cg id='-Round-/-Hardware-/-keyboard_arrow_left' transform='translate(544.000000, 54.000000)'%3E%3Cg%3E%3Crect id='Rectangle-Copy-104' x='0' y='0' width='24' height='24'%3E%3C/rect%3E%3Cpath d='M14.71,15.88 L10.83,12 L14.71,8.12 C15.1,7.73 15.1,7.1 14.71,6.71 C14.32,6.32 13.69,6.32 13.3,6.71 L8.71,11.3 C8.32,11.69 8.32,12.32 8.71,12.71 L13.3,17.3 C13.69,17.69 14.32,17.69 14.71,17.3 C15.09,16.91 15.1,16.27 14.71,15.88 Z' id='🔹-Icon-Color' fill='%231D1D1D'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E") no-repeat 50% 50%;
     mask: no-repeat 50% 50%;
     -webkit-mask-size: contain;
     mask-size: contain;
-    background-color: #383737;
+    background-repeat: no-repeat;
+    background-color: #9b2525;
+    z-index: 0;
 }
 
 .the-icon-arrow-down {

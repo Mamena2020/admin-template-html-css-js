@@ -4,9 +4,19 @@
 
 var toastContainer
 window.addEventListener("load", () => {
+
+    window.addEventListener('scroll', function () {
+        if (winX !== null && winY !== null) {
+            window.scrollTo(winX, winY);
+        }
+    });
+    
+
     loadTheModalSystem()
     loadTheToastSystem()
-    theToastShow("helow", 3, "success");
+    // theToastShow("helow", 3, "success")
+
+    theFloatingMenuLoad()
 })
 function randomString(length) {
     var result = '';
@@ -26,7 +36,7 @@ function loadTheModalSystem() {
             modalContent.childNodes.forEach(child => {
                 if (hasClass(child, "the-modal-close-button")) {
                     child.addEventListener("click", () => {
-                        modal.style.display = "none"
+                        theModalHide(modal.getAttribute("id"))
                     })
                 }
             })
@@ -38,12 +48,15 @@ function theModalShow(id) {
     var modal = document.getElementById(id)
     if (modal != undefined) {
         modal.style.display = "block"
+
+        disableScrolling()
     }
 }
 function theModalHide(id) {
     var modal = document.getElementById(id)
     if (modal != undefined) {
         modal.style.display = "none"
+        enableScrolling()
     }
 }
 
@@ -53,7 +66,6 @@ function loadTheToastSystem() {
     toastContainer =
         toastContainer = document.createElement('ul');
     toastContainer.setAttribute("id", "__the_toast_Container__");
-    // toastContainer.setAttribute("aria-live", "assertive");
     document.body.appendChild(toastContainer);
 }
 
@@ -182,5 +194,130 @@ function theToastRemove(toastId) {
     }
 }
 
-// ====================================================================================== alert dialog
+// ====================================================================================== floating menu
+
+function theFloatingMenuLoad() {
+    // var _theFloatingMenus = document.getElementsByClassName("the-floating-menu");
+    // Array.prototype.forEach.call(_theFloatingMenus, (_theFloatingMenu) => {
+    //     _theFloatingMenu.addEventListener("click", (e) => {
+    //         theFloatingMenuShow(_theFloatingMenu)
+    //     })
+    // })
+    document.addEventListener("click", (event) => {
+        if (hasClass(event.target, "the-floating-menu")) {
+            theFloatingMenuShow(event.target)
+            console.log("show fm1")
+        }
+        if (hasClass(event.target.parentNode, "the-floating-menu") && !hasClass(event.target, "active")) {
+            theFloatingMenuShow(event.target.parentNode)
+            console.log("show fm2")
+        }
+        if (hasClass(event.target, "the-floating-menu-container") && hasClass(event.target, "active")) {
+            console.log("hide fm")
+            theFloatingMenuHide(event.target)
+        }
+
+    });
+}
+
+function theFloatingMenuShow(theFloatingMenu) {
+    disableScrolling()
+    theFloatingMenu.childNodes.forEach((child) => {
+        if (hasClass(child, "the-floating-menu-container")) {
+            child.classList.add("active")
+
+            child.addEventListener("click", (e2) => {
+
+            })
+            var content = child.firstElementChild
+            if (content != undefined && hasClass(content, "the-floating-menu-content")) {
+                var currentOffset = getPositionBaseOnScreen(theFloatingMenu)
+                var contentSize = {
+                    w: content.offsetWidth,
+                    h: content.offsetHeight,
+                }
+                var midXOffset = theFloatingMenu.offsetWidth / 2 + (currentOffset.x)
+                var midYOffset = theFloatingMenu.offsetHeight / 2 + (currentOffset.y)
+                if (midXOffset + contentSize.w > window.innerWidth / 2) {
+                    content.style.left = midXOffset - contentSize.w + "px"
+                }
+                else {
+                    if (midXOffset - contentSize.w > 0) {
+                        content.style.left = midXOffset - contentSize.w + "px"
+                    }
+                    else {
+                        content.style.left = midXOffset + "px"
+                    }
+                }
+                // show y offset
+                if (currentOffset.y + content.offsetHeight > window.innerHeight) {
+                    content.style.top = midYOffset - content.offsetHeight + "px"
+                }
+                else {
+                    content.style.top = midYOffset + "px"
+                }
+            }
+        }
+    })
+}
+
+function theFloatingMenuHide(element) {
+    enableScrolling()
+    element.classList.remove("active")
+}
+
+function getPosition(element) {
+    var xPosition = 0,
+        yPosition = 0;
+
+    while (element) {
+        xPosition += (element.offsetLeft + element.clientLeft);
+        yPosition += (element.offsetTop + element.clientTop);
+        element = element.offsetParent;
+    }
+    return {
+        x: xPosition,
+        y: yPosition
+    };
+}
+
+function getScroll() {
+    return {
+        x: document.documentElement.scrollLeft || document.body.scrollLeft,
+        y: document.documentElement.scrollTop || document.body.scrollTop
+    };
+}
+
+function getPositionBaseOnScreen(element) {
+    var _pos = getPosition(element)
+    var scroll = getScroll()
+    return {
+        x: (_pos.x - scroll.x),
+        y: (_pos.y - scroll.y)
+    }
+}
+
+var scrollX;
+var scrollY;
+function disableScrolling() {
+    winX = window.scrollX;
+    winY = window.scrollY;
+    // scrollX = window.scrollX;
+    // scrollY = window.scrollY;
+    // window.onscroll = () => { window.scrollTo(scrollX, scrollY); };
+    // document.body.style.overflowY = "hidden";
+}
+
+function enableScrolling() {
+    winX = null;
+    winY = null;
+    // window.onscroll = function () { };
+    // document.body.style.overflowY = "scroll";
+}
+
+var winX = null;
+var winY = null;
+
+
+
 

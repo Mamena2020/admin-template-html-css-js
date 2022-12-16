@@ -15,51 +15,7 @@
 
 <body>
     <div id="the-body">
-        <!-- --------------------------------------------------------------------- top bar -->
-        <div id="the-topnav">
-            <div id="the-topnav-header">
-                <div class="the-center">
-                    <div class="the-icon-menu" style="background-color: #ffffff; height: 22px; width: 22px;"></div>
-                </div>
-            </div>
 
-            <div id="the-topnav-right">
-                <div class="the-center-right the-topnav-menu-icon" onclick="admin_open_topnav_menu()">
-                    <div class="the-icon-user" style="background-color: #ffffff;"></div>
-                </div>
-
-                <div id="the-topnav-menu">
-                    <div id="the-topnav-menu-list">
-                        <a href="google.com" class="the-topnav-menu-item">
-                            <div class="the-icon">
-                                <div class="the-icon-user"></div>
-                            </div>
-                            Profile
-                        </a>
-                        <a class="the-topnav-menu-item">
-                            <div class="the-icon">
-                                <div class="the-icon-activity-log"></div>
-                            </div>
-                            Activity log
-                        </a>
-                        <a class="the-topnav-menu-item">
-                            <div class="the-icon">
-                                <div class="the-icon-lock"></div>
-                            </div>
-                            Change password
-                        </a>
-                        <div class="the-topnav-menu-item" onclick="admin_logout()">
-                            <div class="the-icon">
-                                <div class="the-icon-logout"></div>
-                            </div>
-                            Log out
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <!-- --------------------------------------------------------------------- end top bar -->
 
         <div id="the-content">
             <div id="mymodal" class="the-modal">
@@ -209,6 +165,9 @@
                 <div class="the-icon">
                     <div class="the-icon-arrow-right"></div>
                 </div>
+                <div class="the-icon">
+                    <div class="the-icon-menu"></div>
+                </div>
 
 
             </div>
@@ -226,6 +185,7 @@
                 <div class="the-button-flat-primary">
                     Flat button
                 </div>
+
             </div>
             <div class="the-row " style="margin-top: 10px;">
                 <div class="the-button-raised-primary" onclick="theModalShow('mymodal')">
@@ -236,6 +196,14 @@
                 <div class="the-button-raised" onclick="theToastShow('this is success toast',5,'success')">
                     Toast success
                 </div>
+                <div class="the-button-raised the-floating-menu">
+                    Floating menu 1
+                    <div class="the-floating-menu-container">
+                        <div class="the-floating-menu-content">
+                            test
+                        </div>
+                    </div>
+                </div>
                 <div class="the-button-raised" onclick="theToastShow('this is warning toast',5,'warning')">
                     Toast warning
                 </div>
@@ -244,6 +212,14 @@
                 </div>
                 <div class="the-button-raised" onclick="theToastShow('this is error toast',5,'error')">
                     Toast error
+                </div>
+                <div class="the-button-raised the-floating-menu">
+                    <div class="the-icon-home"></div> Floating menu 2
+                    <div class="the-floating-menu-container">
+                        <div class="the-floating-menu-content">
+                            teasda asdacasdst
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -261,6 +237,16 @@
                     <div class="the-icon-close"></div>
                 </div>
             </div>
+            <div class="the-button-raised the-floating-menu">
+                Floating menu 3
+                <div class="the-floating-menu-container">
+                    <div class="the-floating-menu-content" style="height: 200px; width: 200px;">
+                        oa asda sdakmsdkas daskdm 3
+
+                    </div>
+                </div>
+            </div>
+
 
             <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, saepe dolor eveniet maxime incidunt
@@ -498,6 +484,63 @@
         </div>
 
     </div>
+
+    <!-- --------------------------------------------------------------------- top bar -->
+    <div class="the-topnav">
+        <div class="the-topnav-header " id="the-topnav-header">
+            <div class="the-center">
+                <div class="the-icon-menu" style="background-color: #ffffff; height: 22px; width: 22px;"></div>
+            </div>
+        </div>
+
+
+
+        <ul class="the-topnav-right">
+
+            <!-- <div class="the-center-right the-topnav-menu-icon the-floating-menu" onclick=""> -->
+
+            <li class="the-center-right the-topnav-item the-floating-menu" style="width: 50px;">
+                <div class="the-icon-user" style="background-color: #ffffff;">
+                </div>
+                <div class="the-floating-menu-container">
+
+                    <div class="the-floating-menu-content" >
+
+                        <div class="the-topnav-menu-list">
+                            <a href="google.com" class="the-topnav-menu-item">
+                                <div class="the-icon">
+                                    <div class="the-icon-user"></div>
+                                </div>
+                                Profile
+                            </a>
+                            <a class="the-topnav-menu-item">
+                                <div class="the-icon">
+                                    <div class="the-icon-activity-log"></div>
+                                </div>
+                                Activity log
+                            </a>
+                            <a class="the-topnav-menu-item">
+                                <div class="the-icon">
+                                    <div class="the-icon-lock"></div>
+                                </div>
+                                Change password
+                            </a>
+                            <div class="the-topnav-menu-item" onclick="admin_logout()">
+                                <div class="the-icon">
+                                    <div class="the-icon-logout"></div>
+                                </div>
+                                Log out
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </li>
+
+        </ul>
+    </div>
+    <!-- --------------------------------------------------------------------- end top bar -->
+
     <!-- --------------------------------------------------------------------- sidebar -->
     <div id="the-sidebar" class="the-sidebar-hide">
         <div id="the-sidebar-brand">
