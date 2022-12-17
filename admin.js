@@ -29,6 +29,7 @@ window.addEventListener("load", () => {
   var the_topNavHeader = document.getElementById("the-topnav-header")
   if (the_topNavHeader != undefined) {
     the_topNavHeader.addEventListener("click", () => {
+      console.log("open sidebar")
       admin_open_the_sidebar()
     })
   }

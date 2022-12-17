@@ -1,22 +1,26 @@
 /* modal, alert dialog, toast */
 
 
+var __successColor1 = "#27a881"
+var __successColor2 = "#186a51"
+var __warningColor1 = "#d6dc2d"
+var __warningColor2 = "#747804"
+var __dangerColor1 = "#972d1d"
+var __dangerColor2 = "#721818"
+var __infoColor1 = "#7c7c79"
+var __infoColor2 = "#2f2f2e"
 
 var toastContainer
-window.addEventListener("load", () => {
-
+window.addEventListener("load", async () => {
+    await loadTheModalSystem()
+    await loadTheToastSystem()
+    await theAlertLoad()
+    await theFloatingMenuLoad()
     window.addEventListener('scroll', function () {
         if (winX !== null && winY !== null) {
             window.scrollTo(winX, winY);
         }
     });
-    
-
-    loadTheModalSystem()
-    loadTheToastSystem()
-    // theToastShow("helow", 3, "success")
-
-    theFloatingMenuLoad()
 })
 function randomString(length) {
     var result = '';
@@ -28,7 +32,7 @@ function randomString(length) {
     return result;
 }
 // ====================================================================================== modal
-function loadTheModalSystem() {
+async function loadTheModalSystem() {
     var the_modals = document.getElementsByClassName("the-modal");
     Array.prototype.forEach.call(the_modals, function (modal) {
         var modalContent = modal.firstElementChild
@@ -47,22 +51,22 @@ function loadTheModalSystem() {
 function theModalShow(id) {
     var modal = document.getElementById(id)
     if (modal != undefined) {
-        modal.style.display = "block"
-
+        modal.classList.add("show")
         disableScrolling()
     }
 }
 function theModalHide(id) {
     var modal = document.getElementById(id)
+    console.log("hide modal")
     if (modal != undefined) {
-        modal.style.display = "none"
+        modal.classList.remove("show")
         enableScrolling()
     }
 }
 
 // ====================================================================================== toast
 
-function loadTheToastSystem() {
+async function loadTheToastSystem() {
     toastContainer =
         toastContainer = document.createElement('ul');
     toastContainer.setAttribute("id", "__the_toast_Container__");
@@ -90,39 +94,39 @@ function theToastShow(message, duration = 1, type = "success") {
     var _theListtileIcon = document.createElement("div")
     if (type == "success") {
         _theListtileIcon.classList.add("the-icon-check")
-        _theListtileIcon.style.backgroundColor = "#186a51"
+        _theListtileIcon.style.backgroundColor = __successColor2
 
         _theListtileTitle.innerHTML = "Success"
-        _theListtileTitle.style.color = "#186a51"
+        _theListtileTitle.style.color = __successColor2
 
-        _toast.style.borderColor = "#27a881"
+        _toast.style.borderColor = __successColor1
     }
     if (type == "warning") {
         _theListtileIcon.classList.add("the-icon-warning-triangle")
-        _theListtileIcon.style.backgroundColor = "#747804"
+        _theListtileIcon.style.backgroundColor = __warningColor2
 
         _theListtileTitle.innerHTML = "Warning"
-        _theListtileTitle.style.color = "#747804"
+        _theListtileTitle.style.color = __warningColor2
 
-        _toast.style.borderColor = "#d6dc2d"
+        _toast.style.borderColor = __warningColor1
     }
     if (type == "info") {
         _theListtileIcon.classList.add("the-icon-info")
-        _theListtileIcon.style.backgroundColor = "#2f2f2e"
+        _theListtileIcon.style.backgroundColor = __infoColor2
 
         _theListtileTitle.innerHTML = "Info"
-        _theListtileTitle.style.color = "#2f2f2e"
+        _theListtileTitle.style.color = __infoColor2
 
-        _toast.style.borderColor = "#7c7c79"
+        _toast.style.borderColor = __infoColor1
     }
     if (type == "error") {
         _theListtileIcon.classList.add("the-icon-error")
-        _theListtileIcon.style.backgroundColor = "#721818"
+        _theListtileIcon.style.backgroundColor = __dangerColor2
 
         _theListtileTitle.innerHTML = "Error"
-        _theListtileTitle.style.color = "#721818"
+        _theListtileTitle.style.color = __dangerColor2
 
-        _toast.style.borderColor = "#972d1d"
+        _toast.style.borderColor = __dangerColor1
     }
     _theListtileIconParent.appendChild(_theListtileIcon)
 
@@ -196,7 +200,7 @@ function theToastRemove(toastId) {
 
 // ====================================================================================== floating menu
 
-function theFloatingMenuLoad() {
+async function theFloatingMenuLoad() {
     // var _theFloatingMenus = document.getElementsByClassName("the-floating-menu");
     // Array.prototype.forEach.call(_theFloatingMenus, (_theFloatingMenu) => {
     //     _theFloatingMenu.addEventListener("click", (e) => {
@@ -208,15 +212,21 @@ function theFloatingMenuLoad() {
             theFloatingMenuShow(event.target)
             console.log("show fm1")
         }
-        if (hasClass(event.target.parentNode, "the-floating-menu") && !hasClass(event.target, "active")) {
-            theFloatingMenuShow(event.target.parentNode)
-            console.log("show fm2")
-        }
-        if (hasClass(event.target, "the-floating-menu-container") && hasClass(event.target, "active")) {
-            console.log("hide fm")
-            theFloatingMenuHide(event.target)
-        }
-
+        else
+            if (hasClass(event.target.parentNode, "the-floating-menu") && !hasClass(event.target, "active")) {
+                theFloatingMenuShow(event.target.parentNode)
+                console.log("show fm2")
+            }
+            else
+                if (hasClass(event.target, "the-floating-menu-container") && hasClass(event.target, "active")) {
+                    console.log("hide fm")
+                    theFloatingMenuHide(event.target)
+                }
+        // else
+        // {
+        //     console.log("else")
+        //     console.log(event.target)
+        // }
     });
 }
 
@@ -225,10 +235,6 @@ function theFloatingMenuShow(theFloatingMenu) {
     theFloatingMenu.childNodes.forEach((child) => {
         if (hasClass(child, "the-floating-menu-container")) {
             child.classList.add("active")
-
-            child.addEventListener("click", (e2) => {
-
-            })
             var content = child.firstElementChild
             if (content != undefined && hasClass(content, "the-floating-menu-content")) {
                 var currentOffset = getPositionBaseOnScreen(theFloatingMenu)
@@ -256,6 +262,10 @@ function theFloatingMenuShow(theFloatingMenu) {
                 else {
                     content.style.top = midYOffset + "px"
                 }
+                // ------------------ animated
+                content.classList.add("show")
+
+
             }
         }
     })
@@ -264,7 +274,137 @@ function theFloatingMenuShow(theFloatingMenu) {
 function theFloatingMenuHide(element) {
     enableScrolling()
     element.classList.remove("active")
+    if (element.firstElementChild != undefined) {
+        element.firstElementChild.classList.remove("show")
+    }
 }
+
+// ====================================================================================== alert dialog
+async function theAlertLoad() {
+
+    // var _footer = document.querySelector('footer')
+    // if (_footer != null || _footer != undefined) {
+
+    //     var alertContainer = document.createElement("div")
+    //     alertContainer.setAttribute("id", "the-alert-container")
+    //     _footer.appendChild(alertContainer)
+    // }
+
+    var alertContainer = document.createElement("div")
+    alertContainer.setAttribute("id", "the-alert-container")
+    document.body.appendChild(alertContainer)
+
+}
+
+function theAlertShow(options = Object) {
+    try {
+        let title = options.title
+        let message = options.message
+        let type = options.type
+        let align = options.align
+
+        let alertWidth = options.alertWidth
+        let alertHeight = options.alertHeight
+        let alertPosition = options.alertPosition
+        let actionPosition = options.buttonPosition
+        let backgroundColor = options.backgroundColor
+        // confirm
+        let onConfirm = options.onConfirm
+        let confirmText = options.confirmText
+        // cancel
+        let onCancel = options.onCancel
+        let cancelText = options.cancelText
+        let showCancelButton = options.showCancelButton
+        //-----------------------------------------
+        let alertContent = document.createElement("div")
+        alertContent.classList.add("the-alert-content")
+        if (alertPosition == undefined || alertPosition == "center") {
+            alertContent.classList.add("center")
+        }
+        else {
+            alertContent.classList.add(alertPosition)
+        }
+        if (backgroundColor != undefined) {
+            alertContent.style.backgroundColor = backgroundColor
+        }
+        // ----------------------------- type | icon
+        if (type != undefined) {
+
+            let alertIconContainer = document.createElement("div")
+            alertIconContainer.style.display = "flex"
+            alertIconContainer.style.justifyContent = "center"
+            alertIconContainer.style.alignItems = "center"
+            let alertIcon = document.createElement("div")
+            alertIcon.style.height = "35px"
+            alertIcon.style.width = "35px"
+            alertIcon.style.margin = "8px"
+            if (type == "success") {
+                alertIcon.classList.add("the-icon-check")
+                alertIcon.style.backgroundColor = __successColor1
+
+            }
+            alertIconContainer.appendChild(alertIcon)
+            alertContent.appendChild(alertIconContainer)
+        }
+        // ----------------------------- title
+        if (title != undefined) {
+            let titleContainer = document.createElement("div")
+            titleContainer.innerHTML = title
+            titleContainer.style.textAlign = "center"
+            titleContainer.classList.add("the-alert-title")
+            alertContent.appendChild(titleContainer)
+        }
+        // ----------------------------- message
+        if (message != undefined) {
+            let messageContainer = document.createElement("div")
+            messageContainer.innerHTML = message
+            messageContainer.classList.add("the-alert-message")
+            alertContent.appendChild(messageContainer)
+        }
+        // ----------------------------- align
+        if (align == undefined || align == "center") {
+            alertContent.classList.add("align-center")
+        }
+        // ----------------------------- cancel button top
+        if (showCancelButton != undefined && showCancelButton == true) {
+            var alertCancelButton = document.createElement("div")
+            alertCancelButton.classList.add("the-icon-close")
+            alertCancelButton.style.right = "0%"
+            alertCancelButton.style.top = "0%"
+            alertCancelButton.style.height = "15x"
+            alertCancelButton.style.width = "15px"
+            alertCancelButton.style.position = "absolute"
+            alertCancelButton.style.cursor = "pointer"
+            alertCancelButton.style.margin = "4px"
+            alertCancelButton.style.backgroundColor = __infoColor1
+            alertCancelButton.style.opacity = "0.4"
+            alertCancelButton.addEventListener("click", () => {
+                alertContainer.style.display = "none"
+                alertContent.remove()
+            })
+
+            alertContent.appendChild(alertCancelButton)
+        }
+
+
+        // ----------------------------- buttons
+        let buttonsContainer = document.createElement("div")
+
+
+
+
+        let alertContainer = document.getElementById("the-alert-container")
+        alertContainer.style.display = "block"
+        alertContainer.appendChild(alertContent)
+
+    } catch (e) {
+        console.log(e)
+    }
+
+}
+
+
+// ====================================================================================== 
 
 function getPosition(element) {
     var xPosition = 0,
@@ -299,6 +439,8 @@ function getPositionBaseOnScreen(element) {
 
 var scrollX;
 var scrollY;
+var winX = null;
+var winY = null;
 function disableScrolling() {
     winX = window.scrollX;
     winY = window.scrollY;
@@ -315,8 +457,15 @@ function enableScrolling() {
     // document.body.style.overflowY = "scroll";
 }
 
-var winX = null;
-var winY = null;
+
+async function createFooter() {
+    if (document.body.footer == undefined) {
+        console.log("create footer")
+        var footer = "<footer></footer>";
+        document.body.innerHTML = document.body.innerHTML + footer;
+    }
+}
+
 
 
 

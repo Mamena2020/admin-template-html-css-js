@@ -20,12 +20,11 @@
         <div id="the-content">
             <div id="mymodal" class="the-modal">
                 <div class="the-modal-content">
-                    <div class="the-modal-close-button">
+                    <div class="the-modal-close-button" onclick="theModalHide('mymodal')">
                         <div class="the-icon-close" style="background-color: #9ab0b0;"></div>
                     </div>
                     <div class="the-modal-header"></div>
                     <div class="the-modal-body">The Modal
-
                     </div>
                 </div>
             </div>
@@ -244,6 +243,12 @@
                         oa asda sdakmsdkas daskdm 3
 
                     </div>
+                </div>
+            </div>
+
+            <div class="the-row " style="margin-top: 10px;">
+                <div class="the-button-raised-primary" onclick="theAlert()">
+                    Show Alert
                 </div>
             </div>
 
@@ -504,7 +509,7 @@
                 </div>
                 <div class="the-floating-menu-container">
 
-                    <div class="the-floating-menu-content" >
+                    <div class="the-floating-menu-content">
 
                         <div class="the-topnav-menu-list">
                             <a href="google.com" class="the-topnav-menu-item">
@@ -587,6 +592,12 @@
             </li>
             <li class="the-sidebar-menu-item">
                 <div class="the-icon">
+                    <div class="the-icon-play"></div>
+                </div>
+                Content
+            </li>
+            <li class="the-sidebar-menu-item">
+                <div class="the-icon">
                     <div class="the-icon-address-book"></div>
                 </div>
                 About
@@ -620,69 +631,25 @@
             </li>
             <!-- ------------------------ -->
 
-            <li class="the-sidebar-menu-item">
-                <div class="the-icon">
-                    X
-                </div>
-                Product
-            </li>
-            <li class="the-sidebar-menu-item">
-                <div class="the-icon">
-                    X
-                </div>
-                Product
-            </li>
-            <li class="the-sidebar-menu-item">
-                <div class="the-icon">
-                    X
-                </div>
-                Product
-            </li>
-            <!-- <div class="the-sidebar-menu-item">
-                <div class="the-icon">
-                    X
-                </div>
-                Product
-            </div>
-            <div class="the-sidebar-menu-item">
-                <div class="the-icon">
-                    X
-                </div>
-                Product
-            </div>
-            <div class="the-sidebar-menu-item">
-                <div class="the-icon">
-                    X
-                </div>
-                Product
-            </div>
-            <div class="the-sidebar-menu-item">
-                <div class="the-icon">
-                    X
-                </div>
-                Product
-            </div>
-            <div class="the-sidebar-menu-item">
-                <div class="the-icon">
-                    X
-                </div>
-                Product
-            </div>
-            <div class="the-sidebar-menu-item">
-                <div class="the-icon">
-                    X
-                </div>
-                Product
-            </div> -->
-
-
-
 
         </ul>
     </div>
     <!-- --------------------------------------------------------------------- end sidebar -->
 
-
+    <script>
+        function theAlert() {
+            console.log("show alert")
+            theAlertShow(
+                {
+                    // alertPosition: "bottom-left",
+                    type: "success",
+                    title: "helow",
+                    message: "this is text message",
+                    showCancelButton: true
+                }
+            )
+        }
+    </script>
 
 
 </body>
