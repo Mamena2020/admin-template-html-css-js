@@ -5,8 +5,8 @@ var __successColor1 = "#27a881"
 var __successColor2 = "#186a51"
 var __warningColor1 = "#d6dc2d"
 var __warningColor2 = "#747804"
-var __dangerColor1 = "#972d1d"
-var __dangerColor2 = "#721818"
+var __errorColor1 = "#972d1d"
+var __errorColor2 = "#721818"
 var __infoColor1 = "#7c7c79"
 var __infoColor2 = "#2f2f2e"
 
@@ -121,12 +121,12 @@ function theToastShow(message, duration = 1, type = "success") {
     }
     if (type == "error") {
         _theListtileIcon.classList.add("the-icon-error")
-        _theListtileIcon.style.backgroundColor = __dangerColor2
+        _theListtileIcon.style.backgroundColor = __errorColor2
 
         _theListtileTitle.innerHTML = "Error"
-        _theListtileTitle.style.color = __dangerColor2
+        _theListtileTitle.style.color = __errorColor2
 
-        _toast.style.borderColor = __dangerColor1
+        _toast.style.borderColor = __errorColor1
     }
     _theListtileIconParent.appendChild(_theListtileIcon)
 
@@ -222,11 +222,7 @@ async function theFloatingMenuLoad() {
                     console.log("hide fm")
                     theFloatingMenuHide(event.target)
                 }
-        // else
-        // {
-        //     console.log("else")
-        //     console.log(event.target)
-        // }
+
     });
 }
 
@@ -300,7 +296,7 @@ function theAlertShow(options = Object) {
     try {
         let title = options.title
         let message = options.message
-        let type = options.type
+        let alertType = options.type
         let align = options.align
 
         let alertWidth = options.alertWidth
@@ -315,20 +311,24 @@ function theAlertShow(options = Object) {
         let onCancel = options.onCancel
         let cancelText = options.cancelText
         let showCancelButton = options.showCancelButton
+        //----------------------------------------- container
+        let alertContainer = document.getElementById("the-alert-container")
         //-----------------------------------------
         let alertContent = document.createElement("div")
         alertContent.classList.add("the-alert-content")
+        alertContent.classList.add("the-animate-scale-1")
         if (alertPosition == undefined || alertPosition == "center") {
-            alertContent.classList.add("center")
+            alertContainer.style.display = "flex"
         }
         else {
+            alertContainer.style.display = "block"
             alertContent.classList.add(alertPosition)
         }
         if (backgroundColor != undefined) {
             alertContent.style.backgroundColor = backgroundColor
         }
         // ----------------------------- type | icon
-        if (type != undefined) {
+        if (alertType != undefined) {
 
             let alertIconContainer = document.createElement("div")
             alertIconContainer.style.display = "flex"
@@ -338,10 +338,25 @@ function theAlertShow(options = Object) {
             alertIcon.style.height = "35px"
             alertIcon.style.width = "35px"
             alertIcon.style.margin = "8px"
-            if (type == "success") {
+            if (alertType == "success") {
                 alertIcon.classList.add("the-icon-check")
                 alertIcon.style.backgroundColor = __successColor1
-
+            }
+            if (alertType == "warning") {
+                alertIcon.classList.add("the-icon-warning-triangle")
+                alertIcon.style.backgroundColor = __warningColor1
+            }
+            if (alertType == "info") {
+                alertIcon.classList.add("the-icon-info")
+                alertIcon.style.backgroundColor = __infoColor1
+            }
+            if (alertType == "question") {
+                alertIcon.classList.add("the-icon-question")
+                alertIcon.style.backgroundColor = __infoColor1
+            }
+            if (alertType == "error") {
+                alertIcon.classList.add("the-icon-error")
+                alertIcon.style.backgroundColor = __errorColor1
             }
             alertIconContainer.appendChild(alertIcon)
             alertContent.appendChild(alertIconContainer)
@@ -388,14 +403,22 @@ function theAlertShow(options = Object) {
 
 
         // ----------------------------- buttons
-        let buttonsContainer = document.createElement("div")
+        // let buttonsContainer = document.createElement("div")
 
 
 
 
-        let alertContainer = document.getElementById("the-alert-container")
-        alertContainer.style.display = "block"
+
         alertContainer.appendChild(alertContent)
+        alertContainer.addEventListener("click", () => {
+            if (alertContainer.firstElementChild != undefined) {
+                alertContainer.firstElementChild.classList.add("the-animate-shake")
+                setTimeout(() => {
+                    alertContainer.firstElementChild.classList.remove("the-animate-shake")
+                }, 250);
+            }
+        })
+
 
     } catch (e) {
         console.log(e)

@@ -195,14 +195,6 @@
                 <div class="the-button-raised" onclick="theToastShow('this is success toast',5,'success')">
                     Toast success
                 </div>
-                <div class="the-button-raised the-floating-menu">
-                    Floating menu 1
-                    <div class="the-floating-menu-container">
-                        <div class="the-floating-menu-content">
-                            test
-                        </div>
-                    </div>
-                </div>
                 <div class="the-button-raised" onclick="theToastShow('this is warning toast',5,'warning')">
                     Toast warning
                 </div>
@@ -641,11 +633,13 @@
             console.log("show alert")
             theAlertShow(
                 {
-                    // alertPosition: "bottom-left",
-                    type: "success",
+                    // alertPosition: "bottom-right",
+                    type: "question",
                     title: "helow",
-                    message: "this is text message",
-                    showCancelButton: true
+                    
+                    // message: "this is text message<br> asdas asdas d <br> asdasd asds <br> aasd asdasdasd? this is text message<br> asdas asdas d <br> asdasd asds <br> aasd asdasdasd?",
+                    showCancelButton: true,
+
                 }
             )
         }

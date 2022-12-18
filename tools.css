@@ -1,4 +1,129 @@
 /* modal, alert dialog, splash */
+
+/* https://css-tricks.com/making-css-animations-feel-natural/ */
+
+
+@keyframes frame-animate-scale-1 {
+    0% {
+        transform: scale(1, 1) translateY(0);
+    }
+
+    10% {
+        transform: scale(1.05, 1.05) translateY(0);
+    }
+
+    30% {
+        transform: scale(1.1, 1.1) translateY(0);
+    }
+
+    100% {
+        transform: scale(1, 1) translateY(0);
+    }
+}
+
+@keyframes frame-animate-bounce-4 {
+    0% {
+        transform: scale(1, 1) translateY(0);
+    }
+
+    10% {
+        transform: scale(1.1, .9) translateY(0);
+    }
+
+    30% {
+        transform: scale(.9, 1.1) translateY(-20px);
+    }
+
+    50% {
+        transform: scale(1, 1) translateY(0);
+    }
+
+    100% {
+        transform: scale(1, 1) translateY(0);
+    }
+}
+
+@keyframes frame-animate-bounce-5 {
+    0% {
+
+        transform: scale(1, 1) translateY(0);
+    }
+
+    10% {
+        transform: scale(1.1, .9) translateY(0);
+
+    }
+
+    30% {
+        transform: scale(.9, 1.1) translateY(-20px);
+
+    }
+
+    50% {
+        transform: scale(1, 1) translateY(0);
+
+    }
+
+    57% {
+        transform: scale(1, 1) translateY(-7px);
+
+    }
+
+    64% {
+        transform: scale(1, 1) translateY(0);
+
+    }
+
+    100% {
+        transform: scale(1, 1) translateY(0);
+
+    }
+}
+
+@keyframes frame-animate-shake {
+
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+
+.the-animate-scale-1 {
+    animation-name: frame-animate-scale-1;
+    animation-timing-function: ease;
+}
+
+
+.the-animate-bounce-4 {
+    animation-name: frame-animate-bounce-4;
+    animation-timing-function: ease;
+}
+
+.the-animate-bounce-5 {
+    animation-name: frame-animate-bounce-5;
+    animation-timing-function: ease;
+}
+.the-animate-shake {
+    animation-name: frame-animate-shake;
+    animation-timing-function: ease;
+}
+
 /* ------------------------------------------------------------------------------------- modal */
 .the-modal {
     display: none;
@@ -54,8 +179,9 @@
 .the-modal.show>.the-modal-content {
     width: 85%;
     height: 85%;
-    animation: animate-modal 0.1s linear;
+    animation: frame-animate-scale-1 0.4s linear;
 }
+
 
 .the-modal-header {
     height: 56px;
@@ -238,8 +364,11 @@
 }
 
 .the-floating-menu-container.active>.the-floating-menu-content.show {
-    animation: the-floating-animate-size 0.4s ease;
+    /* animation: the-floating-animate-size 0.4s ease; */
+    animation-duration: 0.2s;
     /* transition: all 0.3s linear; */
+    animation-name: frame-animate-scale-1;
+    animation-timing-function: linear;
 }
 
 /* -------------------------------------------------------------------------------------- alert dialog */
@@ -250,6 +379,8 @@
     background-color: #3e3e3d2e;
     position: fixed;
     display: none;
+    align-items: center;
+    justify-content: center;
 }
 
 .the-alert-content {
@@ -261,6 +392,8 @@
     background-color: #ffffff;
     grid-template-rows: auto;
     display: grid;
+    position: absolute;
+    animation-duration: 0.4s;
 }
 
 .the-alert-content.align-center {
@@ -293,19 +426,13 @@
 }
 
 .the-alert-content.center {
-    margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-/* 
-.the-alert-icon {
-    font-weight: 800;
-    margin: 8px;
-    font-size: 2em;
-} */
+
 .the-alert-title {
     font-weight: 800;
     margin-top: 3px;
@@ -317,9 +444,11 @@
 
 .the-alert-message {
     font-weight: normal;
-    margin-top: 0px;
-    margin-bottom: 3px;
+    margin: 8px;
+    padding: 4px;
+    /* margin-top: 5px;
+    margin-bottom: 5px;
     margin-left: 7px;
-    margin-right: 7px;
+    margin-right: 7px; */
     font-size: 1.2em;
 }
