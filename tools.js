@@ -12,10 +12,11 @@ var __infoColor2 = "#2f2f2e"
 
 var toastContainer
 window.addEventListener("load", async () => {
-    await loadTheModalSystem()
-    await loadTheToastSystem()
-    await theAlertLoad()
-    await theFloatingMenuLoad()
+    loadTheModalSystem()
+    loadTheToastSystem()
+    theAlertLoad()
+    theFloatingMenuLoad()
+    theSwitchLoad();
     window.addEventListener('scroll', function () {
         if (winX !== null && winY !== null) {
             window.scrollTo(winX, winY);
@@ -427,6 +428,26 @@ function theAlertShow(options = Object) {
 }
 
 
+// ====================================================================================== the switch
+function theSwitchLoad() {
+    document.addEventListener("click", (event) => {
+        console.log(event.target)
+        if (event.target.tagName.toLowerCase() === 'input' &&
+            event.target.getAttribute('type') === 'checkbox') {
+            let isChecked = event.target.checked
+            console.log(isChecked)
+            if (isChecked == true) {
+                event.target.checked = true
+                event.target.setAttribute("checked", '')
+            }
+            else {
+                event.target.removeAttribute("checked")
+                event.target.checked = false
+            }
+        }
+
+    })
+}
 // ====================================================================================== 
 
 function getPosition(element) {

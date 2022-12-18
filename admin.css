@@ -1,14 +1,17 @@
 :root {
-    --primary1: #7da7a7;
-    --primary2: #b7cbcb;
+    --primary1: #2c9191;
+    --primary2: #4ac4c4;
     --primary3: #c7dfdf;
     --primary4: #ddf3f3;
+
     --secondary1: #465050;
     --secondary2: #797c7c;
     --secondary3: #a0a3a3;
     --secondary4: #f5f7f7;
+
     --white: #ffffff;
     --shadow1: #b9c3c6;
+
     --success1: #27a881;
     --success2: #186a51;
     --warning1: #d6dc2d;
@@ -18,6 +21,29 @@
     --info1: #7c7c79;
     --info2: #2f2f2e;
 }
+/* :root {
+    --primary1: #51912c;
+    --primary2: #4ac454;
+    --primary3: #c7dfc8;
+    --primary4: #ddf3df;
+
+    --secondary1: #465050;
+    --secondary2: #797c7c;
+    --secondary3: #a0a3a3;
+    --secondary4: #f5f7f7;
+    
+    --white: #ffffff;
+    --shadow1: #b9c3c6;
+
+    --success1: #27a881;
+    --success2: #186a51;
+    --warning1: #d6dc2d;
+    --warning2: #747804;
+    --error1: #972d1d;
+    --error2: #721818;
+    --info1: #7c7c79;
+    --info2: #2f2f2e;
+} */
 
 /* ------------------------------------------------------------------------------------- general */
 .the-center {
@@ -377,7 +403,7 @@ body {
 
 ::-webkit-scrollbar-thumb {
     background-color: var(--primary1);
-    outline: 1px solid var(--primary2);
+    /* outline: 1px solid var(--primary2); */
 }
 
 /* ------------------------------------------------------------------------------------- sidebar */
@@ -403,6 +429,7 @@ body {
 /* ------------------ show hide */
 .the-sidebar-hide {
     transform: translate(-250px, 0);
+    box-shadow: none !important;
 }
 
 .the-sidebar-show {

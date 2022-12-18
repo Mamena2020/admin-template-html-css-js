@@ -18,6 +18,7 @@
     --info1: #7c7c79;
     --info2: #2f2f2e;
 }
+
 /* modal, alert dialog, splash */
 
 /* https://css-tricks.com/making-css-animations-feel-natural/ */
@@ -36,6 +37,7 @@
     70% {
         transform: scale(0.8, 0.8) translateY(0);
     }
+
     /* 90% {
         transform: scale(1.1, 1.1) translateY(0);
     } */
@@ -45,6 +47,7 @@
         transform: scale(1, 1) translateY(0);
     }
 }
+
 @keyframes frame-animate-scale-1 {
     0% {
         transform: scale(1, 1) translateY(0);
@@ -150,6 +153,7 @@
     animation-name: frame-animate-appear;
     animation-timing-function: ease;
 }
+
 .the-animate-scale-1 {
     animation-name: frame-animate-scale-1;
     animation-timing-function: ease;
@@ -165,6 +169,7 @@
     animation-name: frame-animate-bounce-5;
     animation-timing-function: ease;
 }
+
 .the-animate-shake {
     animation-name: frame-animate-shake;
     animation-timing-function: ease;
@@ -252,7 +257,8 @@
     align-items: center;
     cursor: pointer;
 }
-.the-modal-close-button> {
+
+.the-modal-close-button {
     float: right;
     height: 56px;
     width: 56px;
@@ -261,6 +267,10 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+}
+
+.the-modal-close-icon {
+    background-color: var(--primary1) !important;
 }
 
 /* -------------------------------------------------------------------------------------- toast */
@@ -297,7 +307,7 @@
     margin: 0px;
 
     overflow: hidden;
-    background-color:var(--white);
+    background-color: var(--white);
     box-shadow: 3px 3px 5px var(--shadow1);
 
     border-radius: 4px;
@@ -506,4 +516,60 @@
     margin-left: 7px;
     margin-right: 7px; */
     font-size: 1.2em;
+}
+
+/* -------------------------------------------------------------------------------------- switch */
+
+.the-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin: 3px;
+}
+
+.the-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.the-switch-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--secondary3);
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.the-switch-slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+input:checked+.the-switch-slider {
+    background-color: var(--primary1);
+}
+
+/* input:focus+.the-switch-slider {
+    box-shadow: 0 0 1px #2196F3;
+} */
+
+input:checked+.the-switch-slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
 }

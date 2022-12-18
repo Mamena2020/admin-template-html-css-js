@@ -21,7 +21,7 @@
             <div id="mymodal" class="the-modal">
                 <div class="the-modal-content">
                     <div class="the-modal-close-button" onclick="theModalHide('mymodal')">
-                        <div class="the-icon-close" style="background-color: #7da7a7;"></div>
+                        <div class="the-icon-close the-modal-close-icon"></div>
                     </div>
                     <div class="the-modal-header"></div>
                     <div class="the-modal-body">The Modal
@@ -243,6 +243,10 @@
                     Show Alert
                 </div>
             </div>
+            <label class="the-switch">
+                <input type="checkbox">
+                <span class="the-switch-slider"></span>
+            </label>
 
 
             <p>
@@ -636,7 +640,7 @@
                     // alertPosition: "bottom-right",
                     type: "question",
                     title: "helow",
-                    
+
                     // message: "this is text message<br> asdas asdas d <br> asdasd asds <br> aasd asdasdasd? this is text message<br> asdas asdas d <br> asdasd asds <br> aasd asdasdasd?",
                     showCancelButton: true,
 
