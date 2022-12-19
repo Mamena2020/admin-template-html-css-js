@@ -21,6 +21,7 @@
     --info1: #7c7c79;
     --info2: #2f2f2e;
 }
+
 /* :root {
     --primary1: #51912c;
     --primary2: #4ac454;
@@ -225,17 +226,24 @@
     color: var(--white)
 }
 
-.the-button-raised-primary:hover,
-.the-button-flat-primary:hover {
-    color: #687272;
-
-    background-color: var(--primary2);
+.the-button-raised-primary:hover {
+    color: var(--secondary1);
+    background-color: var(--primary2)
 }
 
-.the-button-raised:hover,
+.the-button-raised:hover {
+    color: var(--secondary1);
+    background-color: var(--primary2)
+}
+
+.the-button-flat-primary:hover {
+    color: var(--secondary1);
+    background-color: var(--primary2)
+}
+
 .the-button-flat:hover {
-    /* color: #c3c3c3; */
-    background-color: var(--primary2);
+    color: var(--secondary1);
+    background-color: var(--secondary4)
 }
 
 /* ------------------------------------------------------------------------- flat button */

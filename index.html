@@ -638,14 +638,19 @@
             theAlertShow(
                 {
                     // alertPosition: "bottom-right",
-                    type: "question",
-                    title: "helow",
-
+                    type: "warning",
+                    // title: "Delete data",
+                    message: "Delete this data?",
                     // message: "this is text message<br> asdas asdas d <br> asdasd asds <br> aasd asdasdasd? this is text message<br> asdas asdas d <br> asdasd asds <br> aasd asdasdasd?",
                     showCancelButton: true,
-
+                    confirmButtonText: "Delete",
+                    confirmButtonBgColor: "#d04b37"
                 }
-            )
+            ).then((result) => {
+                console.log(result)
+            }).catch((err) => {
+                console.log(err)
+            });
         }
     </script>
 

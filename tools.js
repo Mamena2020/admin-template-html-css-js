@@ -293,149 +293,206 @@ async function theAlertLoad() {
 
 }
 
-function theAlertShow(options = Object) {
-    try {
-        let title = options.title
-        let message = options.message
-        let alertType = options.type
-        let align = options.align
+async function theAlertShow(options = Object) {
+    return new Promise((resolve, reject) => {
+        try {
+            disableScrolling()
+            let title = options.title
+            let message = options.message
+            let alertType = options.type
+            let align = options.align
 
-        let alertWidth = options.alertWidth
-        let alertHeight = options.alertHeight
-        let alertPosition = options.alertPosition
-        let actionPosition = options.buttonPosition
-        let backgroundColor = options.backgroundColor
-        // confirm
-        let onConfirm = options.onConfirm
-        let confirmText = options.confirmText
-        // cancel
-        let onCancel = options.onCancel
-        let cancelText = options.cancelText
-        let showCancelButton = options.showCancelButton
-        //----------------------------------------- container
-        let alertContainer = document.getElementById("the-alert-container")
-        //-----------------------------------------
-        let alertContent = document.createElement("div")
-        alertContent.classList.add("the-alert-content")
-        alertContent.classList.add("the-animate-scale-1")
-        if (alertPosition == undefined || alertPosition == "center") {
-            alertContainer.style.display = "flex"
-        }
-        else {
-            alertContainer.style.display = "block"
-            alertContent.classList.add(alertPosition)
-        }
-        if (backgroundColor != undefined) {
-            alertContent.style.backgroundColor = backgroundColor
-        }
-        // ----------------------------- type | icon
-        if (alertType != undefined) {
+            // let alertWidth = options.alertWidth
+            // let alertHeight = options.alertHeight
+            let alertPosition = options.alertPosition ?? "center"
+            let backgroundColor = options.backgroundColor ?? "#FFFFFF"
 
-            let alertIconContainer = document.createElement("div")
-            alertIconContainer.style.display = "flex"
-            alertIconContainer.style.justifyContent = "center"
-            alertIconContainer.style.alignItems = "center"
-            let alertIcon = document.createElement("div")
-            alertIcon.style.height = "35px"
-            alertIcon.style.width = "35px"
-            alertIcon.style.margin = "8px"
-            if (alertType == "success") {
-                alertIcon.classList.add("the-icon-check")
-                alertIcon.style.backgroundColor = __successColor1
+            let buttonPosition = options.buttonPosition ?? "center"
+            // confirm
+            let showConfirmButton = options.showConfirmButton ?? true
+            let onConfirmButton = options.onConfirmButton ?? function () { }
+            let confirmButtonText = options.confirmButtonText ?? "Ok"
+            let confirmButtonBgColor = options.confirmButtonBgColor
+
+            // cancel
+            let showCancelButton = options.showCancelButton
+            let onCancelButton = options.onCancelButton ?? function () { }
+            let cancelButtonText = options.cancelButtonText ?? "Cancel"
+            let showCancelButtonTop = options.showCancelButtonTop ?? true
+            //----------------------------------------- container
+            let alertContainer = document.getElementById("the-alert-container")
+            //-----------------------------------------
+            let alertContent = document.createElement("div")
+            alertContent.classList.add("the-alert-content")
+            alertContent.classList.add("the-animate-scale-1")
+            if (alertPosition == undefined || alertPosition == "center") {
+                alertContainer.style.display = "flex"
             }
-            if (alertType == "warning") {
-                alertIcon.classList.add("the-icon-warning-triangle")
-                alertIcon.style.backgroundColor = __warningColor1
+            else {
+                alertContainer.style.display = "block"
+                alertContent.classList.add(alertPosition)
             }
-            if (alertType == "info") {
-                alertIcon.classList.add("the-icon-info")
-                alertIcon.style.backgroundColor = __infoColor1
+            if (backgroundColor != undefined) {
+                alertContent.style.backgroundColor = backgroundColor
             }
-            if (alertType == "question") {
-                alertIcon.classList.add("the-icon-question")
-                alertIcon.style.backgroundColor = __infoColor1
+            // ----------------------------- type | icon
+            if (alertType != undefined) {
+                let alertIconContainer = document.createElement("div")
+                alertIconContainer.style.display = "flex"
+                alertIconContainer.style.justifyContent = "center"
+                alertIconContainer.style.alignItems = "center"
+                let alertIcon = document.createElement("div")
+                alertIcon.style.height = "35px"
+                alertIcon.style.width = "35px"
+                alertIcon.style.margin = "8px"
+                if (alertType == "success") {
+                    alertIcon.classList.add("the-icon-check")
+                    alertIcon.style.backgroundColor = __successColor1
+                }
+                if (alertType == "warning") {
+                    alertIcon.classList.add("the-icon-warning-triangle")
+                    alertIcon.style.backgroundColor = __warningColor1
+                }
+                if (alertType == "info") {
+                    alertIcon.classList.add("the-icon-info")
+                    alertIcon.style.backgroundColor = __infoColor1
+                }
+                if (alertType == "question") {
+                    alertIcon.classList.add("the-icon-question")
+                    alertIcon.style.backgroundColor = __infoColor1
+                }
+                if (alertType == "error") {
+                    alertIcon.classList.add("the-icon-error")
+                    alertIcon.style.backgroundColor = __errorColor1
+                }
+                alertIconContainer.appendChild(alertIcon)
+                alertContent.appendChild(alertIconContainer)
             }
-            if (alertType == "error") {
-                alertIcon.classList.add("the-icon-error")
-                alertIcon.style.backgroundColor = __errorColor1
+            // ----------------------------- title
+            if (title != undefined) {
+                let titleContainer = document.createElement("div")
+                titleContainer.innerHTML = title
+                titleContainer.style.textAlign = "center"
+                titleContainer.classList.add("the-alert-title")
+                alertContent.appendChild(titleContainer)
             }
-            alertIconContainer.appendChild(alertIcon)
-            alertContent.appendChild(alertIconContainer)
-        }
-        // ----------------------------- title
-        if (title != undefined) {
-            let titleContainer = document.createElement("div")
-            titleContainer.innerHTML = title
-            titleContainer.style.textAlign = "center"
-            titleContainer.classList.add("the-alert-title")
-            alertContent.appendChild(titleContainer)
-        }
-        // ----------------------------- message
-        if (message != undefined) {
-            let messageContainer = document.createElement("div")
-            messageContainer.innerHTML = message
-            messageContainer.classList.add("the-alert-message")
-            alertContent.appendChild(messageContainer)
-        }
-        // ----------------------------- align
-        if (align == undefined || align == "center") {
-            alertContent.classList.add("align-center")
-        }
-        // ----------------------------- cancel button top
-        if (showCancelButton != undefined && showCancelButton == true) {
-            var alertCancelButton = document.createElement("div")
-            alertCancelButton.classList.add("the-icon-close")
-            alertCancelButton.style.right = "0%"
-            alertCancelButton.style.top = "0%"
-            alertCancelButton.style.height = "15x"
-            alertCancelButton.style.width = "15px"
-            alertCancelButton.style.position = "absolute"
-            alertCancelButton.style.cursor = "pointer"
-            alertCancelButton.style.margin = "8px"
-            alertCancelButton.style.backgroundColor = __infoColor1
-            alertCancelButton.style.opacity = "0.4"
-            alertCancelButton.addEventListener("click", () => {
-                alertContainer.style.display = "none"
-                alertContent.remove()
+            // ----------------------------- message
+            if (message != undefined) {
+                let messageContainer = document.createElement("div")
+                messageContainer.innerHTML = message
+                messageContainer.classList.add("the-alert-message")
+                alertContent.appendChild(messageContainer)
+            }
+            // ----------------------------- align
+            if (align == undefined || align == "center") {
+                alertContent.classList.add("align-center")
+            }
+            // ----------------------------- cancel button top
+            if (showCancelButtonTop != undefined && showCancelButtonTop == true) {
+                var alertCancelButton = document.createElement("div")
+                alertCancelButton.classList.add("the-icon-close")
+                alertCancelButton.style.right = "0%"
+                alertCancelButton.style.top = "0%"
+                alertCancelButton.style.height = "15x"
+                alertCancelButton.style.width = "15px"
+                alertCancelButton.style.position = "absolute"
+                alertCancelButton.style.cursor = "pointer"
+                alertCancelButton.style.margin = "8px"
+                alertCancelButton.style.backgroundColor = __infoColor1
+                alertCancelButton.style.opacity = "0.4"
+                alertCancelButton.addEventListener("click", () => {
+                    removeAlert(alertContainer,alertContent)
+                })
+                alertContent.appendChild(alertCancelButton)
+            }
+            // ----------------------------- buttons
+            let buttonsContainer = document.createElement("div")
+            buttonsContainer.style.height = "45px"
+            buttonsContainer.style.borderTop = __infoColor1
+            buttonsContainer.style.margin = "4px"
+            buttonsContainer.style.display = "flex"
+            buttonsContainer.style.gap = "8px"
+            if (buttonPosition == undefined || buttonPosition == "center") {
+                buttonsContainer.style.alignItems = "center"
+                buttonsContainer.style.justifyContent = "center"
+            }
+            if (showCancelButton == undefined || showCancelButton == true) {
+                let cancelButton = document.createElement("div")
+                cancelButton.classList.add("the-button-flat")
+                cancelButton.innerHTML = cancelButtonText
+                buttonsContainer.appendChild(cancelButton)
+
+                cancelButton.addEventListener("click", () => {
+                    let result = {
+                        "confirmButton": false,
+                        "cancelButton": true,
+                        "denyButton": false
+                    }
+
+                    onCancelButton()
+                    removeAlert(alertContainer,alertContent)
+                    resolve(result)
+                })
+
+            }
+            if (showConfirmButton == undefined || showConfirmButton == true) {
+                let confirmButton = document.createElement("div")
+                confirmButton.classList.add("the-button-flat-primary")
+                if (confirmButtonBgColor != undefined) {
+                    confirmButton.style.backgroundColor = confirmButtonBgColor
+                }
+                confirmButton.innerHTML = confirmButtonText
+                buttonsContainer.appendChild(confirmButton)
+                confirmButton.addEventListener("click", () => {
+                    let result = {
+                        "confirmButton": true,
+                        "cancelButton": false,
+                        "denyButton": false
+                    }
+                    onConfirmButton()
+                    removeAlert(alertContainer,alertContent)
+                    resolve(result)
+                })
+            }
+            alertContent.appendChild(buttonsContainer)
+
+            alertContainer.appendChild(alertContent)
+            alertContainer.addEventListener("click", (event) => {
+                if (alertContainer.firstElementChild != undefined && event.target == alertContainer) {
+                    alertContainer.firstElementChild.classList.add("the-animate-shake")
+                    setTimeout(() => {
+                        alertContainer.firstElementChild.classList.remove("the-animate-shake")
+                    }, 250);
+                }
             })
 
-            alertContent.appendChild(alertCancelButton)
+        } catch (e) {
+            enableScrolling()
+            reject(Error("It broke"));
+            console.log(e)
         }
+    })
 
+}
 
-        // ----------------------------- buttons
-        // let buttonsContainer = document.createElement("div")
-
-
-
-
-
-        alertContainer.appendChild(alertContent)
-        alertContainer.addEventListener("click", () => {
-            if (alertContainer.firstElementChild != undefined) {
-                alertContainer.firstElementChild.classList.add("the-animate-shake")
-                setTimeout(() => {
-                    alertContainer.firstElementChild.classList.remove("the-animate-shake")
-                }, 250);
-            }
-        })
-
-
+function removeAlert(alertContainer, alertContent) {
+    try {
+        
+        enableScrolling()
+        alertContainer.style.display = "none"
+        alertContent.remove()
     } catch (e) {
         console.log(e)
     }
-
 }
 
 
 // ====================================================================================== the switch
 function theSwitchLoad() {
     document.addEventListener("click", (event) => {
-        console.log(event.target)
         if (event.target.tagName.toLowerCase() === 'input' &&
             event.target.getAttribute('type') === 'checkbox') {
             let isChecked = event.target.checked
-            console.log(isChecked)
             if (isChecked == true) {
                 event.target.checked = true
                 event.target.setAttribute("checked", '')

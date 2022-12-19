@@ -17,6 +17,7 @@
     --error2: #721818;
     --info1: #7c7c79;
     --info2: #2f2f2e;
+    --info2: #d04b37;
 }
 
 /* modal, alert dialog, splash */
@@ -454,6 +455,7 @@
     box-shadow: 5px 5px 15px #5d5e5e;
     border-radius: 10px;
     margin: 20px;
+    padding: 10px;
     background-color: var(--white);
     grid-template-rows: auto;
     display: grid;
