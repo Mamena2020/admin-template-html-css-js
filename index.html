@@ -207,14 +207,7 @@
                 <div class="the-button-raised" onclick="theToastShow('this is error toast',5,'error')">
                     Toast error
                 </div>
-                <div class="the-button-raised the-floating-menu">
-                    <div class="the-icon-home"></div> Floating menu 2
-                    <div class="the-floating-menu-container">
-                        <div class="the-floating-menu-content">
-                            teasda asdacasdst
-                        </div>
-                    </div>
-                </div>
+
             </div>
 
             <div class="the-listtile">
@@ -231,38 +224,92 @@
                     <div class="the-icon-close"></div>
                 </div>
             </div>
-            <div class="the-button-raised the-floating-menu">
-                Floating menu 3
-                <div class="the-floating-menu-container">
-                    <div class="the-floating-menu-content" style="height: 200px; width: 200px;">
-                        oa asda sdakmsdkas daskdm 3
 
+            <div class="the-row " style="margin: 10px">
+                <div class="the-button-raised the-floating-menu">
+                    Floating menu 3
+                    <div class="the-floating-menu-container">
+                        <div class="the-floating-menu-content the-card" style="height: 200px; width: 200px;">
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde quas pariatur ad! Veritatis
+                            dolorum, rem iure suscipit doloribus, in, id deleniti dignissimos necessitatibus eveniet
+                            delectus! Illum eligendi quibusdam maxime eius.
+                        </div>
+                    </div>
+                </div>
+                <div class="the-button-raised the-floating-menu">
+                    <div class="the-icon-home"></div> <span style="margin-left: 8px;">Floating menu 2</span>
+                    <div class="the-floating-menu-container">
+                        <div class="the-floating-menu-content the-card">
+                            Floating menu
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="the-row " style="margin-top: 10px;">
+            <div class="the-row " style="margin: 10px">
                 <div class="the-button-raised-primary" onclick="alertLoading()">
                     Alert Loading
                 </div>
-            </div>
-            <div class="the-row " style="margin-top: 10px;">
                 <div class="the-button-raised-primary" onclick="alertConfirm()">
                     Alert Confirm
                 </div>
-            </div>
-            <div class="the-row " style="margin-top: 10px;">
                 <div class="the-button-raised-primary" onclick="alertInfo()">
                     Alert Info
                 </div>
             </div>
-            <label class="the-switch">
-                <input type="checkbox">
-                <span class="the-switch-slider"></span>
-            </label>
+
+            <div class="the-row " style="margin: 10px">
+                <label class="the-switch">
+                    <input type="checkbox">
+                    <span class="the-switch-slider"></span>
+                </label>
+            </div>
+
+            <div class="the-row" style="margin: 10px 10px 200px 10px">
+                <div class="the-tabs">
+                    <div class="the-tabs-bar">
+                        <div class="the-tabs-bar-item" target="tab-timika">
+                            Timika
+                        </div>
+                        <div class="the-tabs-bar-item active" target="tab-jayapura">
+                            Jayapura
+                        </div>
+                        <div class="the-tabs-bar-item" target="tab-merauke">
+                            Merauke
+                        </div>
+                        <div class="the-tabs-bar-item" target="tab-sorong">
+                            Sorong
+                        </div>
+                    </div>
+                    <div class="the-tabs-contents" style="height: 300px;">
+                        <div class="the-tabs-content" id="tab-timika">
+                            Timika Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem veritatis
+                            voluptate officia dolore accusantium omnis sequi temporibus dolor corporis quibusdam.
+                            Distinctio magni quia, alias vitae debitis nam officiis ducimus delectus?
+                        </div>
+                        <div class="the-tabs-content" id="tab-jayapura">
+                            jayapura Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem veritatis
+                            voluptate officia dolore accusantium omnis sequi temporibus dolor corporis quibusdam.
+                            Distinctio magni quia, alias vitae debitis nam officiis ducimus delectus?
+                        </div>
+                        <div class="the-tabs-content" id="tab-merauke">
+                            merauke Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem veritatis
+                            voluptate officia dolore accusantium omnis sequi temporibus dolor corporis quibusdam.
+                            Distinctio magni quia, alias vitae debitis nam officiis ducimus delectus?
+                        </div>
+                        <div class="the-tabs-content" id="tab-sorong">
+                            Sorong Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem veritatis
+                            voluptate officia dolore accusantium omnis sequi temporibus dolor corporis quibusdam.
+                            Distinctio magni quia, alias vitae debitis nam officiis ducimus delectus?
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d">-</div>
 
 
-            <p>
+            <!-- <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, saepe dolor eveniet maxime incidunt
                 ducimus, error cupiditate, quia alias aspernatur ab laboriosam labore consequuntur nesciunt nobis sit
                 suscipit architecto vel?
@@ -494,7 +541,7 @@
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, saepe dolor eveniet maxime incidunt
                 ducimus, error cupiditate, quia alias aspernatur ab laboriosam labore consequuntur nesciunt nobis sit
                 suscipit architecto vel?
-            </p>
+            </p> -->
         </div>
 
     </div>
@@ -671,7 +718,7 @@
                     message: "this is info alert",
                     showCancelButton: false,
                     showConfirmButton: true,
-                    showCancelButtonTop: false,
+                    showCancelButtonTop: true,
                 }
             ).then((result) => {
                 console.log(result)

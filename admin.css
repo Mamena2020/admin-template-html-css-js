@@ -85,6 +85,13 @@
     transform: translateY(-50%);
 }
 
+.the-card {
+    box-shadow: 5px 5px 15px var(--shadow1);
+    border-radius: 10px;
+    background-color: var(--white);
+    padding: 8px;
+}
+
 .transition {
     -webkit-transition: all .8s ease;
     -moz-transition: all .8s ease;

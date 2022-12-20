@@ -16,7 +16,8 @@ window.addEventListener("load", async () => {
     loadTheToastSystem()
     theAlertLoad()
     theFloatingMenuLoad()
-    theSwitchLoad();
+    theSwitchLoad()
+    theTabsLoad()
     window.addEventListener('scroll', function () {
         if (winX !== null && winY !== null) {
             window.scrollTo(winX, winY);
@@ -301,7 +302,7 @@ async function theAlertShow(options = Object) {
             let message = options.message
             let alertType = options.type
             let align = options.align
-            let allowDismiss = options.allowDismiss??false
+            let allowDismiss = options.allowDismiss ?? false
 
             // let alertWidth = options.alertWidth
             // let alertHeight = options.alertHeight
@@ -463,23 +464,20 @@ async function theAlertShow(options = Object) {
             if (showCancelButton || showConfirmButton) {
                 alertContent.appendChild(buttonsContainer)
             }
-            else
-            {
+            else {
                 buttonsContainer.remove()
             }
 
             alertContainer.appendChild(alertContent)
             alertContainer.addEventListener("click", (event) => {
                 if (alertContainer.firstElementChild != undefined && event.target == alertContainer) {
-                    if(!alertContainer.firstElementChild.allowDismiss)
-                    {
+                    if (!alertContainer.firstElementChild.allowDismiss) {
                         alertContainer.firstElementChild.classList.add("the-animate-shake")
                         setTimeout(() => {
                             alertContainer.firstElementChild.classList.remove("the-animate-shake")
                         }, 250);
                     }
-                    else
-                    {
+                    else {
                         removeAlert()
                     }
                 }
@@ -526,6 +524,66 @@ function theSwitchLoad() {
         }
 
     })
+}
+// ====================================================================================== the tabs
+async function theTabsLoad() {
+    await theTabsInit()
+    document.addEventListener("click", async (event) => {
+        if (hasClass(event.target, "the-tabs-bar-item")) {
+            try {
+                let tabsBar = event.target.parentNode
+                Array.prototype.forEach.call(tabsBar.childNodes, (tabsItem) => {
+                    if (hasClass(tabsItem, "the-tabs-bar-item")) {
+                        let targetName = tabsItem.getAttribute("target")
+                        let tabContent = document.getElementById(targetName)
+                        if (tabsItem == event.target) {
+                            tabContent.style.display = "block"
+                            tabsItem.classList.add("active")
+                        }
+                        else {
+                            tabsItem.classList.remove("active")
+                            tabContent.style.display = "none"
+                        }
+                    }
+                })
+            } catch (e) {
+                console.log(e)
+            }
+
+        }
+    })
+}
+
+async function theTabsInit() {
+    try {
+        let tabs = document.getElementsByClassName("the-tabs")
+        Array.prototype.forEach.call(tabs, (tab) => {
+            Array.prototype.forEach.call(tab.childNodes, (tabChild) => {
+                if (hasClass(tabChild, "the-tabs-bar")) {
+                    try {
+                        Array.prototype.forEach.call(tabChild.childNodes, (tabBarItem) => {
+                            if (hasClass(tabBarItem, "the-tabs-bar-item")) {
+                                let targetName = tabBarItem.getAttribute("target")
+                                let tabContent = document.getElementById(targetName)
+                                if (hasClass(tabBarItem, "active")) {
+                                    tabContent.style.display = "block"
+                                }
+                                else {
+                                    tabContent.style.display = "none"
+                                }
+                            }
+
+                        })
+                    } catch (e) {
+                        console.log(e)
+                    }
+                }
+            })
+        })
+    } catch (e) {
+        console.log(e)
+    }
+
 }
 // ====================================================================================== 
 
