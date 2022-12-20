@@ -301,6 +301,7 @@ async function theAlertShow(options = Object) {
             let message = options.message
             let alertType = options.type
             let align = options.align
+            let allowDismiss = options.allowDismiss??false
 
             // let alertWidth = options.alertWidth
             // let alertHeight = options.alertHeight
@@ -325,6 +326,7 @@ async function theAlertShow(options = Object) {
             let alertContent = document.createElement("div")
             alertContent.classList.add("the-alert-content")
             alertContent.classList.add("the-animate-scale-1")
+            alertContent.allowDismiss = allowDismiss
             if (alertPosition == undefined || alertPosition == "center") {
                 alertContainer.style.display = "flex"
             }
@@ -345,24 +347,28 @@ async function theAlertShow(options = Object) {
                 alertIcon.style.height = "35px"
                 alertIcon.style.width = "35px"
                 alertIcon.style.margin = "8px"
-                if (alertType == "success") {
+                if (alertType.toLowerCase() == "success") {
                     alertIcon.classList.add("the-icon-check")
                     alertIcon.style.backgroundColor = __successColor1
                 }
-                if (alertType == "warning") {
+                if (alertType.toLowerCase() == "warning") {
                     alertIcon.classList.add("the-icon-warning-triangle")
                     alertIcon.style.backgroundColor = __warningColor1
                 }
-                if (alertType == "info") {
+                if (alertType.toLowerCase() == "info") {
                     alertIcon.classList.add("the-icon-info")
                     alertIcon.style.backgroundColor = __infoColor1
                 }
-                if (alertType == "question") {
+                if (alertType.toLowerCase() == "question") {
                     alertIcon.classList.add("the-icon-question")
                     alertIcon.style.backgroundColor = __infoColor1
                 }
-                if (alertType == "error") {
+                if (alertType.toLowerCase() == "error") {
                     alertIcon.classList.add("the-icon-error")
+                    alertIcon.style.backgroundColor = __errorColor1
+                }
+                if (alertType.toLowerCase() == "loading") {
+                    alertIcon.classList.add("the-icon-loading")
                     alertIcon.style.backgroundColor = __errorColor1
                 }
                 alertIconContainer.appendChild(alertIcon)
@@ -401,7 +407,7 @@ async function theAlertShow(options = Object) {
                 alertCancelButton.style.backgroundColor = __infoColor1
                 alertCancelButton.style.opacity = "0.4"
                 alertCancelButton.addEventListener("click", () => {
-                    removeAlert(alertContainer,alertContent)
+                    removeAlert()
                 })
                 alertContent.appendChild(alertCancelButton)
             }
@@ -430,7 +436,7 @@ async function theAlertShow(options = Object) {
                     }
 
                     onCancelButton()
-                    removeAlert(alertContainer,alertContent)
+                    removeAlert()
                     resolve(result)
                 })
 
@@ -450,19 +456,32 @@ async function theAlertShow(options = Object) {
                         "denyButton": false
                     }
                     onConfirmButton()
-                    removeAlert(alertContainer,alertContent)
+                    removeAlert()
                     resolve(result)
                 })
             }
-            alertContent.appendChild(buttonsContainer)
+            if (showCancelButton || showConfirmButton) {
+                alertContent.appendChild(buttonsContainer)
+            }
+            else
+            {
+                buttonsContainer.remove()
+            }
 
             alertContainer.appendChild(alertContent)
             alertContainer.addEventListener("click", (event) => {
                 if (alertContainer.firstElementChild != undefined && event.target == alertContainer) {
-                    alertContainer.firstElementChild.classList.add("the-animate-shake")
-                    setTimeout(() => {
-                        alertContainer.firstElementChild.classList.remove("the-animate-shake")
-                    }, 250);
+                    if(!alertContainer.firstElementChild.allowDismiss)
+                    {
+                        alertContainer.firstElementChild.classList.add("the-animate-shake")
+                        setTimeout(() => {
+                            alertContainer.firstElementChild.classList.remove("the-animate-shake")
+                        }, 250);
+                    }
+                    else
+                    {
+                        removeAlert()
+                    }
                 }
             })
 
@@ -475,12 +494,15 @@ async function theAlertShow(options = Object) {
 
 }
 
-function removeAlert(alertContainer, alertContent) {
+function removeAlert() {
     try {
-        
         enableScrolling()
+        let alertContainer = document.getElementById("the-alert-container")
         alertContainer.style.display = "none"
-        alertContent.remove()
+        let alertContent = alertContainer.firstElementChild
+        if (alertContent != undefined) {
+            alertContent.remove()
+        }
     } catch (e) {
         console.log(e)
     }

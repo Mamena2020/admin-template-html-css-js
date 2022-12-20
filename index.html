@@ -167,6 +167,9 @@
                 <div class="the-icon">
                     <div class="the-icon-menu"></div>
                 </div>
+                <div class="the-icon">
+                    <div class="the-icon-loading"></div>
+                </div>
 
 
             </div>
@@ -239,8 +242,18 @@
             </div>
 
             <div class="the-row " style="margin-top: 10px;">
-                <div class="the-button-raised-primary" onclick="theAlert()">
-                    Show Alert
+                <div class="the-button-raised-primary" onclick="alertLoading()">
+                    Alert Loading
+                </div>
+            </div>
+            <div class="the-row " style="margin-top: 10px;">
+                <div class="the-button-raised-primary" onclick="alertConfirm()">
+                    Alert Confirm
+                </div>
+            </div>
+            <div class="the-row " style="margin-top: 10px;">
+                <div class="the-button-raised-primary" onclick="alertInfo()">
+                    Alert Info
                 </div>
             </div>
             <label class="the-switch">
@@ -633,21 +646,71 @@
     <!-- --------------------------------------------------------------------- end sidebar -->
 
     <script>
-        function theAlert() {
+        function alertLoading() {
+            theAlertShow(
+                {
+                    type: "loading",
+                    message: "Deleting data...",
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    showCancelButtonTop: false,
+                }
+            ).then((result) => {
+                console.log(result)
+            }).catch((err) => {
+                console.log(err)
+            });
+            setTimeout(() => {
+                removeAlert()
+            }, 3000);
+        }
+        function alertInfo() {
+            theAlertShow(
+                {
+                    type: "info",
+                    message: "this is info alert",
+                    showCancelButton: false,
+                    showConfirmButton: true,
+                    showCancelButtonTop: false,
+                }
+            ).then((result) => {
+                console.log(result)
+            }).catch((err) => {
+                console.log(err)
+            });
+        }
+        function alertConfirm() {
             console.log("show alert")
             theAlertShow(
                 {
-                    // alertPosition: "bottom-right",
                     type: "warning",
-                    // title: "Delete data",
                     message: "Delete this data?",
-                    // message: "this is text message<br> asdas asdas d <br> asdasd asds <br> aasd asdasdasd? this is text message<br> asdas asdas d <br> asdasd asds <br> aasd asdasdasd?",
                     showCancelButton: true,
+                    showConfirmButton: true,
+                    showCancelButtonTop: false,
                     confirmButtonText: "Delete",
                     confirmButtonBgColor: "#d04b37"
                 }
             ).then((result) => {
                 console.log(result)
+                if (result.confirmButton) {
+                    theAlertShow(
+                        {
+                            type: "success",
+                            message: "Data deleted",
+                            showCancelButton: false,
+                            showConfirmButton: true,
+                            showCancelButtonTop: false,
+                            allowDismiss: true,
+                            confirmButtonText: "Ok",
+                            confirmButtonBgColor: "#27a881"
+                        }
+                    ).then((result) => {
+                        console.log(result)
+                    }).catch((err) => {
+                        console.log(err)
+                    });
+                }
             }).catch((err) => {
                 console.log(err)
             });
