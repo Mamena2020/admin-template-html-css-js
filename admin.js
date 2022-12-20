@@ -292,7 +292,7 @@ function theFloatingMenuShow(theFloatingMenu) {
                 }
                 var midXOffset = theFloatingMenu.offsetWidth / 2 + (currentOffset.x)
                 var midYOffset = theFloatingMenu.offsetHeight / 2 + (currentOffset.y)
-                if (midXOffset + contentSize.w > window.innerWidth / 2) {
+                if (midXOffset + contentSize.w < window.innerWidth / 2) {
                     content.style.left = midXOffset - contentSize.w + "px"
                 }
                 else {
