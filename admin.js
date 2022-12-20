@@ -292,15 +292,20 @@ function theFloatingMenuShow(theFloatingMenu) {
                 }
                 var midXOffset = theFloatingMenu.offsetWidth / 2 + (currentOffset.x)
                 var midYOffset = theFloatingMenu.offsetHeight / 2 + (currentOffset.y)
-                if (midXOffset + contentSize.w < window.innerWidth / 2) {
+                // set x offset
+                if (midXOffset > window.innerWidth / 2) {
+                    // console.log("item on right")
                     content.style.left = midXOffset - contentSize.w + "px"
                 }
                 else {
+                    // console.log("item on left of mid screen")
                     if (midXOffset - contentSize.w > 0) {
+                        // console.log("have to left")
                         content.style.left = midXOffset - contentSize.w + "px"
                     }
                     else {
                         content.style.left = midXOffset + "px"
+                        // console.log("have to right")
                     }
                 }
                 // show y offset
