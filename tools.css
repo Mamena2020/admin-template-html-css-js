@@ -398,6 +398,7 @@
     position: fixed;
     background-color: #4c494911;
     /* padding: 5px; */
+    z-index: 1;
 }
 
 .the-floating-menu-container.active {
@@ -588,15 +589,49 @@ input:checked+.the-switch-slider:before {
 
 }
 
+.the-tabs.horizontal {
+    display: flex;
+}
+
 .the-tabs-bar {
     height: 56px;
     background-color: var(--primary1);
     width: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
+    overflow-x: scroll;
+    overflow-y: hidden;
+
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+
     grid-template-columns: auto;
     display: flex;
+
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.the-tabs-bar::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
+}
+
+.the-tabs.horizontal>.the-tabs-bar {
+    height: 100%;
+    width: auto;
+    display: grid;
+    grid-template-rows: auto;
+
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 10px;
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    justify-content: center;
+    /* align-items: center; */
 }
 
 .the-tabs-bar-item {
@@ -609,9 +644,73 @@ input:checked+.the-switch-slider:before {
     padding-left: 15px;
     padding-right: 15px;
     cursor: pointer;
+
     position: relative;
+}
+
+/* -------------------horizontal */
+.the-tabs.horizontal>.the-tabs-bar>.the-tabs-bar-item {
+    height: auto;
+    width: auto;
+}
+
+.the-tabs.horizontal>.the-tabs-bar>.the-tabs-bar-item.active::after {
+    position: absolute;
+    content: '';
+    height: 10px;
+    width: 10px;
+    background:
+        radial-gradient(circle at bottom left, transparent 10px, var(--white) 0) bottom left;
+    transform: translate(0, 100%);
+    bottom: 0%;
+    right: 0%;
+    z-index: 1;
+    position: absolute;
+}
+
+.the-tabs.horizontal>.the-tabs-bar>.the-tabs-bar-item.active::before {
+    position: absolute;
+    content: '';
+    height: 10px;
+    width: 10px;
+    background:
+        radial-gradient(circle at top left, transparent 10px, var(--white) 0) bottom left;
+    top: -10px;
+    left: 100%;
+    z-index: 1;
+    display: block;
+    position: absolute;
+}
+.the-tabs.horizontal>.the-tabs-bar>.the-tabs-bar-item:hover::after {
+    position: absolute;
+    content: '';
+    height: 10px;
+    width: 10px;
+    background:
+        radial-gradient(circle at bottom left, transparent 10px, var(--secondary4) 0) bottom left;
+    transform: translate(0, 100%);
+    bottom: 0%;
+    right: 0%;
+    z-index: 2;
+    position: absolute;
 
 }
+
+.the-tabs.horizontal>.the-tabs-bar>.the-tabs-bar-item:hover::before {
+    position: absolute;
+    content: '';
+    height: 10px;
+    width: 10px;
+    background:
+        radial-gradient(circle at top left, transparent 10px, var(--secondary4) 0) bottom left;
+    top: -10px;
+    left: 100%;
+    z-index: 2;
+    display: block;
+    position: absolute;
+}
+
+/* -------------------end horizontal */
 
 /* curve - > https://codepen.io/nzbin/pen/wJyRWr */
 .the-tabs-bar-item.active::after {
@@ -624,6 +723,7 @@ input:checked+.the-switch-slider:before {
     transform: translate(100%, 0);
     bottom: 0%;
     right: 0%;
+    z-index: 1;
 }
 
 .the-tabs-bar-item.active::before {
@@ -636,6 +736,7 @@ input:checked+.the-switch-slider:before {
     transform: translate(-100%, 0);
     bottom: 0%;
     left: 0%;
+    z-index: 1;
 }
 
 .the-tabs-bar-item.active {
@@ -646,6 +747,7 @@ input:checked+.the-switch-slider:before {
 .the-tabs-bar-item:hover {
     background-color: var(--secondary4);
     color: var(--primary1);
+    z-index: 2;
 }
 
 .the-tabs-bar-item:hover::after {
@@ -658,6 +760,7 @@ input:checked+.the-switch-slider:before {
     transform: translate(100%, 0);
     bottom: 0%;
     right: 0%;
+    z-index: 2;
 }
 
 .the-tabs-bar-item:hover::before {
@@ -670,16 +773,21 @@ input:checked+.the-switch-slider:before {
     transform: translate(-100%, 0);
     bottom: 0%;
     left: 0%;
+    z-index: 2;
 }
 
 .the-tabs-contents {
     min-height: auto;
     width: 100%;
+    display: flex;
+    /* overflow: scroll; */
 }
 
 .the-tabs-content {
     padding: 10px;
     display: none;
+    height: 100%;
+    width: 100%;
 }
 
 /* -------------------------------------------------------------------------------------- */

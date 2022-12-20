@@ -59,7 +59,6 @@ function theModalShow(id) {
 }
 function theModalHide(id) {
     var modal = document.getElementById(id)
-    console.log("hide modal")
     if (modal != undefined) {
         modal.classList.remove("show")
         enableScrolling()
@@ -212,16 +211,16 @@ async function theFloatingMenuLoad() {
     document.addEventListener("click", (event) => {
         if (hasClass(event.target, "the-floating-menu")) {
             theFloatingMenuShow(event.target)
-            console.log("show fm1")
+            // console.log("show fm1")
         }
         else
             if (hasClass(event.target.parentNode, "the-floating-menu") && !hasClass(event.target, "active")) {
                 theFloatingMenuShow(event.target.parentNode)
-                console.log("show fm2")
+                // console.log("show fm2")
             }
             else
                 if (hasClass(event.target, "the-floating-menu-container") && hasClass(event.target, "active")) {
-                    console.log("hide fm")
+                    // console.log("hide fm")
                     theFloatingMenuHide(event.target)
                 }
 
@@ -279,19 +278,9 @@ function theFloatingMenuHide(element) {
 
 // ====================================================================================== alert dialog
 async function theAlertLoad() {
-
-    // var _footer = document.querySelector('footer')
-    // if (_footer != null || _footer != undefined) {
-
-    //     var alertContainer = document.createElement("div")
-    //     alertContainer.setAttribute("id", "the-alert-container")
-    //     _footer.appendChild(alertContainer)
-    // }
-
     var alertContainer = document.createElement("div")
     alertContainer.setAttribute("id", "the-alert-container")
     document.body.appendChild(alertContainer)
-
 }
 
 async function theAlertShow(options = Object) {
@@ -534,9 +523,12 @@ async function theTabsLoad() {
                 let tabsBar = event.target.parentNode
                 Array.prototype.forEach.call(tabsBar.childNodes, (tabsItem) => {
                     if (hasClass(tabsItem, "the-tabs-bar-item")) {
+                        
+                        
                         let targetName = tabsItem.getAttribute("target")
                         let tabContent = document.getElementById(targetName)
                         if (tabsItem == event.target) {
+                            console.log(tabsItem.style)
                             tabContent.style.display = "block"
                             tabsItem.classList.add("active")
                         }
