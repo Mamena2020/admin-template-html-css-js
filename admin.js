@@ -29,7 +29,7 @@ window.addEventListener("load", async () => {
     scrollEvent()
     // -------------------------------------------------------- sidenav  & top nav load
     theSideNavTopNavLoad()
-    // -------------------------------------------------------- 
+    // --------------------------------------------------------
 })
 /* =========================================================================================================================  */
 /* ========================================================================================================================= Sidenav TopNav */
@@ -274,6 +274,17 @@ async function theFloatingMenuLoad() {
                     // console.log("hide fm")
                     theFloatingMenuHide(event.target)
                 }
+                else
+                    if (hasClass(event.target.parentNode, "the-floating-menu-content") || hasClass(event.target.parentNode.parentNode, "the-floating-menu-content")) {
+
+                        let _floatingContainer = event.target
+                        while (!hasClass(_floatingContainer, "the-floating-menu-container")) {
+                            _floatingContainer = _floatingContainer.parentNode
+                        }
+                        if (hasClass(_floatingContainer, "the-floating-menu-container")) {
+                            theFloatingMenuHide(_floatingContainer)
+                        }
+                    }
 
     });
 }
@@ -324,11 +335,11 @@ function theFloatingMenuShow(theFloatingMenu) {
     })
 }
 
-function theFloatingMenuHide(element) {
+function theFloatingMenuHide(floatingContainerElement) {
     enableScrolling()
-    element.classList.remove("active")
-    if (element.firstElementChild != undefined) {
-        element.firstElementChild.classList.remove("show")
+    floatingContainerElement.classList.remove("active")
+    if (floatingContainerElement.firstElementChild != undefined) {
+        floatingContainerElement.firstElementChild.classList.remove("show")
     }
 }
 
@@ -649,7 +660,7 @@ function theCollapsibleLoad() {
     Array.prototype.forEach.call(the_menu_collapsibles, function (collapsible) {
         collapsible.childNodes.forEach(child => {
             if (hasClass(child, 'the-menu-collapsible-parent')) {
-                //------------------------------------------- add trailing 
+                //------------------------------------------- add trailing
                 var trailing = document.createElement("div")
                 trailing.classList.add("the-trailing")
                 trailing.appendChild(document.createElement("div"))
@@ -673,7 +684,7 @@ function theCollapsibleLoad() {
                     collapsible.expand = false
                     collapsible.setAttribute("expand", false)
                 }
-                // -------------------------- 
+                // --------------------------
             }
         })
         collapsible.addEventListener("click", function (e) {
@@ -818,16 +829,5 @@ function randomString(length) {
     return result;
 }
 
-async function theCall() {
-    let xhttp = new XMLHttpRequest()
-    xhttp.open("get", "https://zomie-server-production.up.railway.app/api/get-rooms", true)
-    xhttp.onreadystatechange = (e) => {
-        if (
-            xhttp.readyState == XMLHttpRequest.DONE) {
-            console.log(xhttp.responseText)
-        }
-    }
-    xhttp.send()
-}
 
 

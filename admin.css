@@ -83,6 +83,7 @@
 /* ---------------------------------------------------------- parents  */
 body {
     margin: 0;
+    background-color: var(--secondary4);
 }
 
 ::-webkit-scrollbar {
@@ -100,10 +101,11 @@ body {
 
 
 .the-body {
-    background-color: var(--secondary4);
-    position: absolute;
+    /* background-color: var(--secondary4); */
+    /* position: absolute; */
     height: 100%;
     width: 100%;
+    position: absolute;
 }
 
 .the-content {
